@@ -10,6 +10,12 @@ class Room
     rooms.keys
   end
 
+  def listexits
+    print "Exits: "
+    rooms.keys.each { |exit| print exit + " " }
+    print "\n"
+  end
+
 	def starting_location?
 		@starting_location
 	end

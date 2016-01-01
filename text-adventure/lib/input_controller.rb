@@ -33,7 +33,7 @@ class InputController
 		end
 
 		if command == "look"
-			@current_message = avatar.location.info
+			@current_message = avatar.location.info, avatar.location.listexits
 		end
 
 		if command == "help"
