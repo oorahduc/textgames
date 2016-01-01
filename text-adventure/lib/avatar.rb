@@ -1,5 +1,5 @@
-class Avatar	
-	
+class Avatar
+
 	def location
 	  @current_room
 	end
@@ -16,6 +16,9 @@ class Avatar
 		if can_move?(direction)
 			new_room = @current_room.rooms[direction]
 			@current_room = new_room
+			print "Exits: "
+			@current_room.exits.each { |exit| print exit + " " }
+			print "\n"
 			true
 		else
 			false

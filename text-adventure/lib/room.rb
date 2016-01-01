@@ -6,6 +6,10 @@ class Room
 		rooms.key?(direction)
 	end
 
+  def exits
+    rooms.keys
+  end
+
 	def starting_location?
 		@starting_location
 	end
