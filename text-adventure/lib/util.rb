@@ -22,4 +22,15 @@ class String
   def underline;      "\e[4m#{self}\e[24m" end
   def blink;          "\e[5m#{self}\e[25m" end
   def reverse_color;  "\e[7m#{self}\e[27m" end
+
+  # to_s.wrap
+  def wrap(length = 80, character = $/)
+    scan(/.{#{length}}|.+/).map { |x| x.strip }.join(character)
+  end
+end
+
+class Numeric
+  def percent_of(n)
+    self.to_f / n.to_f * 100.0
+  end
 end

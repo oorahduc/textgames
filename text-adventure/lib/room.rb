@@ -1,19 +1,23 @@
 class Room
-	attr_accessor :description, :rooms, :items, :info, :handle
+	attr_accessor :description, :rooms, :items, :info, :handle, :roomexits
 	attr_writer :starting_location
+  attr_reader :avatar
 
 	def has_room_to_the?(direction)
 		rooms.key?(direction)
 	end
 
-  def exits
+  def roomexits
     rooms.keys
   end
 
-  def listexits
-    print "Exits: "
-    rooms.keys.each { |exit| print exit + " " }
-    print "\n"
+  def display_room
+    puts description.blue, info.gray
+    puts exits.brown
+  end
+
+  def exits
+    print "Exits: "; rooms.keys.join(" ")
   end
 
 	def starting_location?
