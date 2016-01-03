@@ -1,5 +1,8 @@
 class Avatar
 
+  MAX_HP = 300
+
+
   def location
     @current_room
   end
@@ -9,7 +12,7 @@ class Avatar
     @current_room = starting_location
     # @player_attributes = {:current_hp => 100, :max_hp => 100}
     @player_name = "Chris"
-    @stats = { :current_hp => 300, :max_hp => 300 }
+    @stats = { :current_hp => 300, :max_hp => MAX_HP }
     @health = @stats[:current_hp]
     @maxhealth = @stats[:max_hp]
     @inventory = { :inventory => [] }
@@ -31,7 +34,6 @@ class Avatar
 
   def showstats
     @healthpct = @stats[:current_hp].to_f.percent_of(@stats[:max_hp].to_f).round
-    # puts "You have #{@stats[:current_hp]} current health of #{@stats[:max_hp]} max health. (#{@healthpct}%)"
     puts "#{@stats[:current_hp]} / #{@stats[:max_hp]} (#{@healthpct}%) health."
   end
 
@@ -49,14 +51,6 @@ class Avatar
       @stats[:current_hp] = @stats[:current_hp] + healing
       puts "Yay! +#{healing} to health!"
     end
-  end
-
-  def oldheal(healing)
-    @stats[:current_hp] = @stats[:current_hp] + healing
-    if @stats[:current_hp] > @stats[:max_hp]
-      @stats[:current_hp] = @stats[:max_hp]
-    end
-    puts "Yay! +#{healing} to health!"
   end
 
 end

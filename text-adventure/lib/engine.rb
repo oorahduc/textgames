@@ -18,7 +18,7 @@ class Engine
   end
 
   def prompt
-    puts avatar.health, avatar.maxhealth
+    # puts avatar.health, avatar.maxhealth
     Readline.readline('> ', true)
   end
 

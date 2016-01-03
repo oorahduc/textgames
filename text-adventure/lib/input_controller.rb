@@ -50,12 +50,12 @@ class InputController
 		if command == "test"
 			# @current_message = avatar.location.info
 			# @current_message = avatar.location.roomexits
-			@current_message = avatar.maxhealth
+			# @current_message = avatar.maxhealth
 			# @current_message = avatar.showstats
-			avatar.damage(50)
-			avatar.showstats
-			avatar.heal(30)
-			avatar.showstats
+			# avatar.damage(50)
+			# avatar.showstats
+			# avatar.heal(30)
+			# avatar.showstats
 		end
 
 		if command = "stats"

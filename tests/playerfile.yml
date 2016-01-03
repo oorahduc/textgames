@@ -1,0 +1,19 @@
+-
+  playername:
+  hitpoints: 300
+  maxhitpoints: 300
+  attack: 1
+  description: A trail runs to the north from here.
+  inventory:
+    - item: a health potion
+    - item: a wooden shield
+  equipment:
+    torso: a breastplate
+    head: a helmet
+    righthand: a wooden sword
+    lefthand:
+    legs:
+    feet:
+    arms:
+    hands:
+-
