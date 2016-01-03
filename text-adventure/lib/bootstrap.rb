@@ -23,11 +23,11 @@ class Bootstrap
   end
 
   def controller
-    ctl = InputController.new
-    ctl.messages = @messages
-    ctl.avatar = avatar
-    ctl.initialize_message
-    ctl
+    ctrl = InputController.new
+    ctrl.messages = @messages
+    ctrl.avatar = avatar
+    ctrl.initialize_message
+    ctrl
   end
 
   def splash_message

@@ -26,14 +26,15 @@ class InputController
 			direction = tokens.last
 			if avatar.can_move?(direction)
 				avatar.move(direction)
-				@current_message = avatar.location.description
+				@current_message = avatar.location.description.cyan
 			else
 				@current_message = "Sorry, you cannot go #{direction} from here."
 			end
 		end
 
 		if command == "look"
-			@current_message = avatar.location.info, avatar.location.listexits
+			@current_message = avatar.location.info
+			#@current_message = "#{avatar.location.info}\n#{avatar.location.listexits}"
 		end
 
 		if command == "help"

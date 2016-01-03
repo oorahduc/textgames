@@ -2,6 +2,7 @@ GAME_ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
 require File.join(GAME_ROOT, 'lib', 'bootstrap')
 require File.join(GAME_ROOT, 'lib', 'game')
+require File.join(GAME_ROOT, 'lib', 'colorize')
 
 def lookup_file_from(path)
   File.absolute_path(File.join(GAME_ROOT, path))
