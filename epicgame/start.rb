@@ -4,12 +4,14 @@
 require 'json'
 require 'readline'
 require './lib/game'
-require './lib/player'
+require './lib/avatar'
 
 
 instance = Game.new
-instance.startGame
+instance.startgame
 chris = Player.new('Chris', '0001')
+
+
 # puts chris.name
 # puts chris.hp
 # chris.hp = 50

@@ -20,8 +20,11 @@ class Monster
   end
 
   attr_reader :stats
-  def stats
-    {:hp => 10, :atk => 1}
+  def attr
+    {
+      :hp => 10,
+      :atk => 1
+    }
   end
 
 end

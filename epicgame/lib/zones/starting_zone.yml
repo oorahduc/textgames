@@ -1,0 +1,56 @@
+---
+  -
+    zone_name: "starting zone"
+    slug: "starting-zone"
+    rooms:
+      0001:
+        title: "Entrance of a Cooridor"
+        description: "You are standing at the entrance to a cooridor. It's dank and the air smells of cinders and ash. You feel you've been here before."
+        exits:
+          north:
+            goes_to: "0002"
+            door_exists: false
+            door_open: null
+        objects:
+          -
+            object_id: "2435"
+            object_name: "a silver sword"
+            object_type: "weapon"
+            object_subtype: "sword"
+            object_desc: "a simple sword made of silver."
+      0002:
+        title: "Middle of the Cooridor"
+        description: "You're standing in the middle of a very long cooridor."
+        exits:
+          north:
+            goes_to: "0003"
+            door_exists: false
+            door_open: null
+          east:
+            goes_to: "0004"
+            door_exists: true
+            door_open: false
+          south:
+            goes_to: "0001"
+            door_exists: false
+            door_open: null
+      0003:
+        title: "End of the Cooridor"
+        description: "You are at the end of the cooridor... but is it the end?"
+        exits:
+          north:
+            goes_to: "0001"
+            door_exists: false
+            door_open: null
+          south:
+            goes_to: "0002"
+            door_exists: false
+            door_open: null
+      0004:
+        title: "Dead End"
+        description: "No where to go but back!"
+        exits:
+          west:
+            goes_to: "0002"
+            door_exists: true
+            door_open: false

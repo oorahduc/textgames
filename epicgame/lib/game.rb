@@ -3,13 +3,13 @@ class Game
     puts "Welcome to the Game!"
   end
 
-  def startGame
-    loadZone("./lib/zones/starting_zone.json")
+  def startgame
+    loadzone("./lib/zones/starting_zone.json")
     puts @zone_hash
     prompt
   end
 
-  def loadZone(zone)
+  def loadzone(zone)
     begin
       @zone_file = File.read(zone)
       @zone_hash = JSON.parse(@zone_file)
@@ -20,8 +20,8 @@ class Game
     end
   end
 
-  def movePlayer(player, room_id)
-    player.location = room_id
+  def move_avatar(avatar, room_id)
+    avatar.location = room_id
   end
 
   def prompt
@@ -30,6 +30,7 @@ class Game
       if buf == "look"
         puts "The room is plain"
       end
+      if buf == ""
       print("-> ", buf, "\n")
     end
   end

@@ -1,4 +1,4 @@
-class Player
+class Avatar
   attr_reader :name
   attr_accessor :hp, :location, :attributes
   def initialize(name, location)
