@@ -6,15 +6,19 @@ class Player
     @name = name
     # @current_hp = 100
     # @max_hp = 100
-    # @location = location
+    @location = ""
+  end
+
+  def move(room)
+    @location = room
   end
 
   def hurtPlayer(damage)
-    @hp = @hp - damage
+    @attributes[:current_hp] -= damage
   end
 
   def healPlayer(healing)
-    @hp = @hp + healing
+    @attributes[:current_hp] += healing
   end
 
 end

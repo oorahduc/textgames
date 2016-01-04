@@ -18,9 +18,10 @@ chris = Player.new('Chris', '0001')
 # puts chris.name
 # chris.hurtPlayer(40)
 # puts chris.hp
-puts chris.name
-chris.hurtPlayer(40)
-puts chris.hp
-puts "current hp: #{chris.player_attr[:current_hp]}"
-puts "max hp: #{chris.player_attr[:max_hp]}"
-puts "location: #{chris.location}"
+
+# puts chris.name
+# chris.hurtPlayer(40)
+# puts chris.hp
+# puts "current hp: #{chris.attributes[:current_hp]}"
+# puts "max hp: #{chris.attributes[:max_hp]}"
+# puts "location: #{chris.location}"

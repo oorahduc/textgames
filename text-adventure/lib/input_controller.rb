@@ -58,9 +58,9 @@ class InputController
 			# avatar.showstats
 		end
 
-		if command = "stats"
-			avatar.showstats
-		end
+		# if command = "stats"
+		# 	puts avatar.showstats
+		# end
 
 		if command == "help"
 			@current_message = @messages["help"]

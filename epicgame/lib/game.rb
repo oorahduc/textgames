@@ -6,6 +6,7 @@ class Game
   def startGame
     loadZone("./lib/zones/starting_zone.json")
     puts @zone_hash
+    prompt
   end
 
   def loadZone(zone)

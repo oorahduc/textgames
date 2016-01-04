@@ -6,7 +6,13 @@
   description: A trail runs to the north from here.
   inventory:
     - item: a health potion
+      quantity: 1
+      description: A faintly glowing health potion
+      heal: 50
     - item: a wooden shield
+      quantity: 1
+      description: A stiff wooden shield
+      protection: 3
   equipment:
     torso: a breastplate
     head: a helmet

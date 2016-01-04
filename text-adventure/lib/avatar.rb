@@ -32,10 +32,10 @@ class Avatar
     end
   end
 
-  def showstats
-    @healthpct = @stats[:current_hp].to_f.percent_of(@stats[:max_hp].to_f).round
-    puts "#{@stats[:current_hp]} / #{@stats[:max_hp]} (#{@healthpct}%) health."
-  end
+  # def showstats
+  #   @healthpct = @stats[:current_hp].to_f.percent_of(@stats[:max_hp].to_f).round
+  #   puts "#{@stats[:current_hp]} / #{@stats[:max_hp]} (#{@healthpct}%) health. RATCHAFATCHA!"
+  # end
 
   def damage(damage)
     @stats[:current_hp] = @stats[:current_hp] - damage
