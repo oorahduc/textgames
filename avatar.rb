@@ -37,13 +37,37 @@ class Avatar
     @inventory
   end
 
-  def dropitem(itemid)
+  def additem(itemobject)
+    if @location.objects.include?(itemobject) # ******** PSEUDO CODE
 
+      # Temporarily save object to drop to the room.
+      @tmp = itemobject
 
-  # def showstats
-  #   @healthpct = @stats[:current_hp].to_f.percent_of(@stats[:max_hp].to_f).round
-  #   puts "#{@stats[:current_hp]} / #{@stats[:max_hp]} (#{@healthpct}%) health. RATCHAFATCHA!"
-  # end
+      # Pop item out of room
+      @location.delete(itemobject) # ******** PSEUDO CODE
+
+      # Add object to inventory array.
+      @inventory << @tmp
+    else
+      puts "You can't find it."
+    end
+  end
+
+  def dropitem(itemobject)
+    if @inventory.include?(itemobject)
+
+      # Temporarily save object to drop to the room.
+      @tmp = itemobject
+
+      # Pop item out of inventory
+      @inventory.delete(itemobject)
+
+      # Add item to room.
+      @location.additem(itemobject) # ******** PSEUDO CODE
+    else
+      puts "You can't find it."
+    end
+  end
 
   def damage(damage)
     @hitpoints -= damage
