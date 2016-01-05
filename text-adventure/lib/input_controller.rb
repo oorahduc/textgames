@@ -10,8 +10,8 @@ class InputController
 	end
 
 	def initialize_message
-		@current_message = avatar.location.display_room
-		puts "this is the init message".red  # INIT MESSAGE
+		# @current_message = avatar.location.display_room
+		# puts "this is the init message".red  # INIT MESSAGE
 	end
 
 	def evaluate(input)

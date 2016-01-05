@@ -40,7 +40,6 @@ class GameDataLoader
 
   private
   def get_room
-    puts "Shat"
     Room.new
   end
 

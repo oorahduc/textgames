@@ -6,14 +6,13 @@ class Avatar
     @current_room
   end
 
-  attr_accessor :stats, :inventory, :health, :maxhealth
+  attr_accessor :player_name
   def initialize(starting_location)
     @current_room = starting_location
     @player_name = "Chris"
-    @stats = { :current_hp => 300, :max_hp => 300 }
-    @health = @stats[:current_hp]
-    @maxhealth = @stats[:max_hp]
-    @inventory = { :inventory => [] }
+    @hitpoints = 300
+    @maxhitpoints = 300
+    @inventory = []
   end
 
   def can_move?(direction)
@@ -28,6 +27,10 @@ class Avatar
     else
       false
     end
+  end
+
+  def hitpoints
+    @hitpoints
   end
 
   def inventory
