@@ -4,7 +4,9 @@ class Engine
   attr_accessor :splash_message
   attr_reader :avatar
 
-  def avatar=(avatar); @avatar = avatar; end
+  def avatar=(avatar)
+    @avatar = avatar
+  end
 
   def initialize(controller)
     @ctrl = controller

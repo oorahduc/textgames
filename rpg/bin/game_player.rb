@@ -10,9 +10,10 @@ end
 
 # TODO: this could be a little nicer.
 location_data_file = loaddata "#{ARGV[0]}"
-message_data_file = loaddata "#{ARGV[1]}"
+item_data_file = loaddata "#{ARGV[1]}"
+message_data_file = loaddata "#{ARGV[2]}"
 
 # main
-bootstrap = Bootstrap.new(location_data_file, message_data_file)
+bootstrap = Bootstrap.new(location_data_file, item_data_file, message_data_file)
 game = Game.new(bootstrap)
 game.play

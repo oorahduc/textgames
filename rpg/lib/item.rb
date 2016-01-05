@@ -1,11 +1,14 @@
-class Room
-	attr_accessor :description, :rooms, :items, :info, :handle
-	attr_writer :starting_location
+class Item
+	attr_accessor :id, :shortname, :desc, :weight, :type, :wearloc, :playeraffects
   attr_reader :avatar
 
 	def has_room_to_the?(direction)
 		rooms.key?(direction)
 	end
+
+  def list
+    items.inspect
+  end
 
   def display_room
     puts description.blue, info.gray
@@ -16,7 +19,4 @@ class Room
     print "Exits: "; rooms.keys.join(" ")
   end
 
-	def starting_location?
-		@starting_location
-	end
 end

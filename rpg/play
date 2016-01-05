@@ -1,2 +1,2 @@
 #!/bin/bash
-ruby -v bin/game_player.rb data/rpg/locations.yml data/rpg/messages.yml
+ruby bin/game_player.rb data/rpg/locations.yml data/rpg/itemstore.yml data/rpg/messages.yml

@@ -1,28 +1,27 @@
 -
-  id: 001
+  id: sword
   shortname: shortsword
   desc: A beautiful lake surrounded by trees.
   weight: 5
   type: weapon
   wearloc: righthand
-  playeraffect:
+  playeraffects:
     attack: 5
 -
-  id: 002
+  id: breastplate01
   shortname: breastplate
   desc: A beautiful lake surrounded by trees.
   weight: 15
   type: armor
   wearloc: torso
   playeraffect:
-    protection: 5
+    protections: 5
 -
-  id: 003
+  id: potion_red01
   shortname: red potion
   desc: A swirling red potion.
   weight: 1
   type: potion
   wearloc:
-  playeraffect:
+  playeraffects:
     heal: 20
--

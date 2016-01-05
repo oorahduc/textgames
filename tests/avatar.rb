@@ -26,6 +26,7 @@ class Avatar
 
   def stat
     attributes
+  end
 
 end
 

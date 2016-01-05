@@ -18,7 +18,6 @@ class Avatar
     @inventory = []
   end
 
-  private
   def base_attributes
     @base_stats = { :str => 10, :end => 10 }
     @base_attr = { :current_hp => 300, :max_hp => 300 }
@@ -29,7 +28,6 @@ class Avatar
     @attr = base_attributes["base_attr"]
   end
 
-  private
   def health
     300
   end
@@ -54,6 +52,10 @@ player = Avatar.new("Chris")
 # puts player.attributes
 
 puts player.inspect
+player.damage(50)
+player.health
+player.heal(50)
+player.health
 
 
 # inventory = YAML.load_file('inventory.yml')

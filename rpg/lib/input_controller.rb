@@ -1,5 +1,5 @@
 class InputController
-	attr_reader :avatar, :current_message, :room
+	attr_reader :avatar, :current_message, :room, :item
 
 	def avatar=(avatar)
 		@avatar = avatar
@@ -10,8 +10,8 @@ class InputController
 	end
 
 	def initialize_message
-		@current_message = avatar.location.display_room
-		puts "this is the init message".red  # INIT MESSAGE
+		# @current_message = avatar.location.display_room
+		# puts "this is the init message".red  # INIT MESSAGE
 	end
 
 	def evaluate(input)
@@ -43,6 +43,10 @@ class InputController
 			avatar.damage(amount)
 		end
 
+		if command == "stats"
+			avatar.stats
+		end
+
 		if command == "look"
 			@current_message = avatar.location.display_room
 		end
@@ -56,11 +60,8 @@ class InputController
 			# avatar.showstats
 			# avatar.heal(30)
 			# avatar.showstats
+			puts items.inspect
 		end
-
-		# if command = "stats"
-		# 	puts avatar.showstats
-		# end
 
 		if command == "help"
 			@current_message = @messages["help"]
@@ -70,10 +71,6 @@ class InputController
 			puts "Thank you for playing!"
 			exit(0)
 		end
-	end
-
-	def output(message)
-		puts message
 	end
 
 	def valid?(input)

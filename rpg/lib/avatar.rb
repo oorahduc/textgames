@@ -1,19 +1,16 @@
 class Avatar
 
-  # MAX_HP = 300
-
   def location
     @current_room
   end
 
-  attr_accessor :stats, :inventory, :health, :maxhealth
-  def initialize(starting_location)
+  attr_accessor :player_name, :hitpoints
+  def initialize(name, starting_location)
     @current_room = starting_location
-    @player_name = "Chris"
-    @stats = { :current_hp => 300, :max_hp => 300 }
-    @health = @stats[:current_hp]
-    @maxhealth = @stats[:max_hp]
-    @inventory = { :inventory => [] }
+    @player_name = name
+    @hitpoints = 300
+    @maxhitpoints = 300
+    @inventory = []
   end
 
   def can_move?(direction)
@@ -30,38 +27,73 @@ class Avatar
     end
   end
 
-  def inventory
-    @inventory = []
+  def hitpoints
+    @hitpoints
   end
 
-  # def showstats
-  #   @healthpct = @stats[:current_hp].to_f.percent_of(@stats[:max_hp].to_f).round
-  #   puts "#{@stats[:current_hp]} / #{@stats[:max_hp]} (#{@healthpct}%) health. RATCHAFATCHA!"
-  # end
+  def inventory
+    @inventory
+  end
+
+  def additem(itemobject)
+    if @location.objects.include?(itemobject) # ******** PSEUDO CODE
+
+      # Temporarily save object to drop to the room.
+      @tmp = itemobject
+
+      # Pop item out of room
+      @location.delete(itemobject) # ******** PSEUDO CODE
+
+      # Add object to inventory array.
+      @inventory << @tmp
+    else
+      puts "You can't find it."
+    end
+  end
+
+  def dropitem(itemobject)
+    if @inventory.include?(itemobject)
+
+      # Temporarily save object to drop to the room.
+      @tmp = itemobject
+
+      # Pop item out of inventory
+      @inventory.delete(itemobject)
+
+      # Add item to room.
+      @location.additem(itemobject) # ******** PSEUDO CODE
+    else
+      puts "You can't find it."
+    end
+  end
 
   def damage(damage)
-    @stats[:current_hp] = @stats[:current_hp] - damage
+    @hitpoints -= damage
     puts "Ouch! #{damage} damage taken!"
+    # dead?
   end
 
   def heal(healing)
-    if healing >= @stats[:max_hp] - @stats[:current_hp]
-      healing = @stats[:max_hp] - @stats[:current_hp]
-      @stats[:current_hp] = @stats[:current_hp] + healing
+    if healing >= @maxhitpoints - @hitpoints
+      healing = @maxhitpoints - @hitpoints
+      @hitpoints += healing
       puts "Yay! +#{healing} to health!"
     else
-      @stats[:current_hp] = @stats[:current_hp] + healing
+      @hitpoints += healing
       puts "Yay! +#{healing} to health!"
     end
   end
 
+  def stats
+    puts @hitpoints
+  end
+
   def dead?
-    if @stats[:current_hp] <= 0
+    if @hitpoints <= 0
       puts "You DIED!!"
       exit
-    else
-      puts "Something happened. You're in purgatory."
-      exit
+    # elsif @hitpoints > 0 then
+    #   next
     end
   end
 
