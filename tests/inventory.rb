@@ -1,64 +1,40 @@
-require 'yaml'
-
-class Avatar
-
-  MAX_HP = 300
-
-  attr_accessor :stats, :attr, :inventory, :health, :maxhealth
-
-  ##### THIS IS WRONG. REMEMBER SINGLE RESPONSIBILITY
-  def initialize(name)
-    @name = name
-    @MAX_HP = 300
-    # @player_attributes = {:current_hp => 100, :max_hp => 100}
-    @player_name = "Chris"
-    @stats = { :current_hp => 300, :max_hp => MAX_HP }
-    @health = @stats[:current_hp]
-    @maxhealth = @stats[:max_hp]
-    @inventory = []
-  end
-
-  def base_attributes
-    @base_stats = { :str => 10, :end => 10 }
-    @base_attr = { :current_hp => 300, :max_hp => 300 }
-  end
-
-  def attributes
-    @stats = base_attributes["base_stats"]
-    @attr = base_attributes["base_attr"]
-  end
-
-  def health
-    300
-  end
-
-  def heal(value)
-    health += value
-    puts "Healed for #{value}."
-  end
-
-  def damage(value)
-    health -= value
-    puts "Damaged for #{value}."
-  end
-
-  def stats
-    puts "You have #{health} hitpoints."
-  end
-
+class Item
+    attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
+    def initialize(name, type, attack, armor, wearloc, weight, price)
+        @name = name
+        @type = type
+        @attack = attack
+        @armor = armor
+        @wearloc = wearloc
+        @weight = weight
+        @price = price
+    end
 end
 
-player = Avatar.new("Chris")
-# puts player.attributes
+class Inventory
+    def initialize
+        @items = []
+    end
 
-puts player.inspect
-player.damage(50)
-player.health
-player.heal(50)
-player.health
+    def add_item(item)
+        @items << item
+    end
 
+    def to_s
+        @items.each do |item|
+            puts "#{item.name} (#{item.type})"
+            if item.attack != nil ; puts " %-20s %00d" % ['Attack', item.attack] ; end
+            if item.armor != nil ; puts " %-20s %00d" % ['Armor', item.armor] ; end
+            if item.wearloc != nil ; puts " %-20s %00s" % ['Wear', item.wearloc] ; end
+            if item.weight != nil ; puts " %-20s %00d" % ['Weight', item.weight] ; end
+            if item.price != nil ; puts " %-20s %00d" % ['Price', item.price] ; end
+        end
+    end
+end
 
-# inventory = YAML.load_file('inventory.yml')
-# puts inventory.inspect
-# puts
-# puts inventory[1]
+inv = Inventory.new
+broadsword = Item.new('a heavy broadsword', 'weapon', 5, nil, 'wield', 15, 2)
+breastplate = Item.new('a mithril breastplate', 'armor', nil, 10, 'torso', 15, 5)
+inv.add_item(broadsword)
+inv.add_item(breastplate)
+inv.to_s

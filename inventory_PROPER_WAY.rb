@@ -1,25 +1,37 @@
 require './rpg/lib/util.rb'
 
 class Player
-    attr_accessor :playername
+    attr_accessor :playername, :showinventory
     def initialize(playername)
         @playername = playername
+        @inventory = Inventory.new
+
+        @broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wield', 15, 2)
+        @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
+        @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
+
+        @inventory.additem(@broadsword)
+        @inventory.additem(@breastplate)
+        @inventory.additem(@ring)
     end
+
+    def showinventory
+        @inventory.inventory
+    end
+
 end
 
-class Inventory < Player
-    attr_accessor :items
+class Inventory
+    attr_accessor :items, :additem, :inventory, :showarmor, :showweapon
     def initialize
         @items = []
     end
 
-    def add_item(item)
+    def additem(item)
         @items << item
     end
 
-    attr_accessor :inventory
     def inventory
-        #@items.each do |item|
         @items.sort_by {|i| i.type}.each do |item|
             puts "#{item.name} (#{item.type})"
             if item.attack != nil ; puts " %-20s %00d" % ['Attack', item.attack] ; end
@@ -31,7 +43,6 @@ class Inventory < Player
         nil
     end
 
-    attr_accessor :showarmor
     def showarmor
         puts "Armor:"
         @items.each { |item|
@@ -46,7 +57,6 @@ class Inventory < Player
         nil
     end
 
-    attr_accessor :showweapon
     def showweapon
         puts "Weapon:"
         @items.each { |item|
@@ -60,11 +70,9 @@ class Inventory < Player
 
         nil
     end
-
-
 end
 
-class Item < Inventory
+class Item
     attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
     def initialize(name, type, attack, armor, wearloc, weight, price)
         @name = name
@@ -77,17 +85,6 @@ class Item < Inventory
     end
 end
 
-inv = Inventory.new
-broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wield', 15, 2)
-breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
-ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
-inv.add_item(broadsword)
-inv.add_item(breastplate)
-inv.add_item(ring)
-
 player = Player.new('Chris')
-# puts player.inventory
-puts inv.inventory
-puts inv.showarmor
-puts inv.showweapon
+puts player.showinventory
 
