@@ -3,20 +3,40 @@ class Room
 	attr_writer :starting_location
   attr_reader :avatar
 
-	def has_room_to_the?(direction)
-		rooms.key?(direction)
-	end
+  def initialize
+    @roomitems = Roomitems.new
 
-  def display_room
-    puts description.blue, info.gray
-    puts exits.brown
+    def has_room_to_the?(direction)
+      rooms.key?(direction)
+    end
+
+    def display_room
+      puts description.blue, info.gray
+      puts exits.brown
+    end
+
+    def exits
+      print "Exits: "; rooms.keys.join(" ")
+    end
+
+    def starting_location?
+      @starting_location
+    end
   end
 
-  def exits
-    print "Exits: "; rooms.keys.join(" ")
-  end
+  class Roomitems
+    attr_accessor :contents
+    def initialize
+      @contents = []
+    end
 
-	def starting_location?
-		@starting_location
-	end
-end
+    attr_accessor :put
+    def put(item)
+      @contents << item
+    end
+
+    attr_accessor :remove
+    def remove(item)
+      @contents.delete(item)
+    end
+  end

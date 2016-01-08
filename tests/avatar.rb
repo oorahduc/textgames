@@ -31,11 +31,6 @@ class Avatar
 end
 
 
-
-
-
-
-
 class Potion < Item
   def initialize
     @name = "potion"

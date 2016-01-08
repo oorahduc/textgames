@@ -92,8 +92,8 @@ class Avatar
     if @hitpoints <= 0
       puts "You DIED!!"
       exit
-    # elsif @hitpoints > 0 then
-    #   next
+      # elsif @hitpoints > 0 then
+      #   next
     end
   end
 
