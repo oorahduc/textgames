@@ -40,6 +40,9 @@ class InputController
 		when "wear"
 			keyword = tokens.last
 			avatar.wear_item(keyword)
+		when "remove", "rem"
+			keyword = tokens.last
+			avatar.remove_item(keyword)
 		when "heal"
 			amount = tokens.last.to_i
 			avatar.heal(amount)
@@ -48,11 +51,11 @@ class InputController
 			avatar.damage(amount)
 		when "stats"
 			avatar.stats
-		when "look"
+		when "look", "l"
 			@current_message = avatar.location.display_room
 		when "test"
 			puts items.inspect
-		when "inventory", "inv"
+		when "inventory", "inv", "i"
 			avatar.showinventory
 		when "help"
 			@current_message = @messages["help"]
@@ -77,7 +80,7 @@ class InputController
 
 	# Validate command tokens
 	def valid_commands
-		@commands ||= %w(look exit quit test stats heal inv inventory equipment equip eq wear remove drop get damage help) # add:  get, drop, wear, wield, remove
+		@commands ||= %w(look l exit quit test stats heal inventory inv i equipment equip eq wear remove rem drop get damage help) # add:  get, drop, wear, wield, remove
 	end
 
 end

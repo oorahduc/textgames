@@ -50,18 +50,35 @@ class Avatar
 
   attr_accessor :wear_item
   def wear_item(keyword)
-    @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) if x.name.include?(keyword)}
+    begin
+      @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) if x.name.include?(keyword)}
+      puts "Equipped."
+    rescue
+      puts "Huh?"
+    end
   end
 
-  # NEED TO FORMAT THIS ACCORDING TO WEAR_ITEM
+  ############# MUST IMPLEMENT THIS PROPERLY
   attr_accessor :remove_item
-  def remove_item(item)
-    if @equipment.equipped.include?(item)
-      @inventory.additem(item)
-      @equipment.worn.delete(item)
-    else
-      puts "You aren't wearing that."
+  def remove_item(keyword)
+    # @equipment.worn.map{|x| puts x if x.name.include?(keyword) }
+    begin
+      # @equipment.worn.map{|x| @inventory.contents.additem(x) and @equipment.worn[x.wearloc] = nil if x.name.include?(keyword)}
+      @equipment.worn.map{|x| @inventory.contents.additem(x) if x.name.include?(keyword)}
+      puts @equipment.worn['finger'].inspect
+
+      puts "Removed."
+    rescue
+      puts "Huh?"
+      # puts @equipment.worn.map{|x| puts @equipment.worn.inspect}
     end
+
+    # if @equipment.equipped.include?(item)
+    #   @inventory.additem(item)
+    #   @equipment.worn.delete(item)
+    # else
+    #   puts "You aren't wearing that."
+    # end
   end
 
   # NEED TO FORMAT THIS ACCORDING TO WEAR_ITEM

@@ -1,5 +1,3 @@
-
-
 class Inventory
   attr_accessor :contents
   def initialize
@@ -68,41 +66,6 @@ class Inventory
   end
 end
 
-class Item
-  attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
-  def initialize(name, type, attack, armor, wearloc, weight, price)
-    @name = name
-    @type = type
-    @attack = attack
-    @armor = armor
-    @wearloc = wearloc
-    @weight = weight
-    @price = price
-  end
-end
-
-class Equipment
-  attr_accessor :worn, :equipped, :possible_wearlocs
-  def initialize
-    @worn = Hash.new
-    @possible_wearlocs = ["head", "torso", "finger", "wielding"]
-  end
-
-  def equipped
-    puts "Equipment:".blue
-    if @worn.empty?
-      puts "You are wearing nothing."
-    end
-    @worn.each do |key, val|
-      if val.wearloc == "wielding"
-        puts "You are wielding #{val.name.red}."
-      else
-        puts "You are wearing #{val.name.cyan} on your #{val.wearloc}."
-      end
-    end
-  end
-
-end
 
 # player = Player.new('Chris')
 # puts player.showinventory
