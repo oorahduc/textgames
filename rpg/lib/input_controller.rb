@@ -21,9 +21,10 @@ class InputController
 			return
 		end
 
+		# Evaluate commands
 		command = tokens.first
-
-		if command == "go"
+		case command
+		when "go"
 			direction = tokens.last
 			if avatar.can_move?(direction)
 				avatar.move(direction)
@@ -31,27 +32,19 @@ class InputController
 			else
 				@current_message = "Sorry, you cannot go #{direction} from here."
 			end
-		end
-
-		if command == "heal"
+		when "wear"
+			player.wear
+		when "heal"
 			amount = tokens.last.to_i
 			avatar.heal(amount)
-		end
-
-		if command == "damage"
+		when "damage"
 			amount = tokens.last.to_i
 			avatar.damage(amount)
-		end
-
-		if command == "stats"
+		when "stats"
 			avatar.stats
-		end
-
-		if command == "look"
+		when "look"
 			@current_message = avatar.location.display_room
-		end
-
-		if command == "test"
+		when "test"
 			# @current_message = avatar.location.info
 			# @current_message = avatar.location.roomexits
 			# @current_message = avatar.maxhealth
@@ -61,16 +54,13 @@ class InputController
 			# avatar.heal(30)
 			# avatar.showstats
 			puts items.inspect
-		end
-
-		if command == "help"
+		when "help"
 			@current_message = @messages["help"]
-		end
-
-		if command == "exit" || command == "quit"
+		when "exit", "quit"
 			puts "Thank you for playing!"
 			exit(0)
 		end
+
 	end
 
 	def valid?(input)

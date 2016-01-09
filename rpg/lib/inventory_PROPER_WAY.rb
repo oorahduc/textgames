@@ -1,7 +1,7 @@
-require '../lib/util.rb'
+require './util.rb'
 
 class Player
-  attr_accessor :playername, :inventory
+  attr_accessor :playername, :showinventory
   def initialize(playername)
     @playername = playername
     @inventory = Inventory.new
@@ -15,24 +15,26 @@ class Player
     @inventory.additem(@broadsword)
     @inventory.additem(@breastplate)
     @inventory.additem(@ring)
-    @inventory.additem(@dagger)
+    # @inventory.additem(@dagger)
 
     @equipment = Equipment.new
-    @equipment.wear(@dagger)
-    @equipment.wear(@ring)
   end
 
-  def wear_item(item)
-    if @inventory.include?(item)
-      @equipment.wear(item)
-    end
+  attr_accessor :wear_item
+  def wear_item(keyword)
+    @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) if x.name.include?(keyword)}
+    # if @inventory.contents.include?(item)
+    #   @inventory.contents.map{|x| @equipment.worn << x and @inventory.contents.delete(x) if x.name.include?(keyword) }
+    # else
+    #   puts "You don't have that."
+    # end
   end
 
   attr_accessor :remove_item
   def remove_item(item)
-    if @equipped[item.wearloc].include?(item)
+    if @equipment.equipped.include?(item)
       @inventory.additem(item)
-      @equipped.remove(item)
+      @equipment.worn.delete(item)
     else
       puts "You aren't wearing that."
     end
@@ -41,11 +43,25 @@ class Player
   attr_accessor :equipped
   def equipped
     @equipment.equipped
+    # puts "Equipment:".blue
+    # if @equipment.worn.empty?
+    #   puts "You are wearing nothing."
+    # end
+    # @equipment.worn.each do |key, val|
+    #   # puts "#{item.wearloc} : #{item.name}"
+    #   if val.wearloc == "wielding"
+    #     puts "You are wielding #{val.name.red}."
+    #   else
+    #     puts "You are wearing #{val.name.cyan} on your #{val.wearloc}."
+    #   end
+    # end
+
+    nil
   end
 
   attr_accessor :showinventory
   def showinventory
-    @inventory.inventory
+    @inventory.listinventory
   end
 
   attr_accessor :affects
@@ -56,19 +72,32 @@ class Player
 end
 
 class Inventory
-  attr_accessor :items
+  attr_accessor :contents
   def initialize
-    @items = []
+    @contents = []
   end
 
   attr_accessor :additem
   def additem(item)
-    @items << item
+    @contents << item
+    nil
+  end
+
+  attr_accessor :listinventory
+  def listinventory
+    puts "Inventory".blue
+    if @contents.empty?
+      puts "Your inventory is empty."
+    end
+    @contents.sort_by {|i| i.type}.each do |item|
+      puts "#{item.name} (#{item.type})"
+    end
+    nil
   end
 
   attr_accessor :inventory
   def inventory
-    @items.sort_by {|i| i.type}.each do |item|
+    @contents.sort_by {|i| i.type}.each do |item|
       puts "#{item.name} (#{item.type})"
       if item.attack != nil ; puts " %-20s %00d" % ['Attack', item.attack] ; end
       if item.armor != nil ; puts " %-20s %00d" % ['Armor', item.armor] ; end
@@ -82,7 +111,7 @@ class Inventory
   attr_accessor :showarmor
   def showarmor
     puts "Armor:"
-    @items.each { |item|
+    @contents.each { |item|
       puts item.name if item.type == "armor"
       puts " %-20s %00d" % ['Attack', item.attack] unless item.type != "armor" || item.attack == 0
       puts " %-20s %00d" % ['Armor', item.armor] unless item.type != "armor" || item.armor == 0
@@ -97,7 +126,7 @@ class Inventory
   attr_accessor :showweapons
   def showweapons
     puts "Weapon:"
-    @items.each { |item|
+    @contents.each { |item|
       puts item.name if item.type == "weapon"
       puts " %-20s %00d" % ['Attack', item.attack] unless item.type != "weapon" || item.attack == 0
       puts " %-20s %00d" % ['Armor', item.armor] unless item.type != "weapon" || item.armor == 0
@@ -124,36 +153,69 @@ class Item
 end
 
 class Equipment
-  attr_accessor :equipped, :wield
+  attr_accessor :worn, :equipped, :possible_wearlocs
   def initialize
-    @equipped = Hash.new
+    @worn = Hash.new
     @possible_wearlocs = ["head", "torso", "finger", "wielding"]
   end
 
-  attr_accessor :wear
-  def wear(item)
-    if @possible_wearlocs.include?(item.wearloc)
-      @equipped[item.wearloc] = item
-      puts @equipped
-    else
-      puts "Wear what where?"
+  def equipped
+    puts "Equipment:".blue
+    if @worn.empty?
+      puts "You are wearing nothing."
+    end
+    @worn.each do |key, val|
+      if val.wearloc == "wielding"
+        puts "You are wielding #{val.name.red}."
+      else
+        puts "You are wearing #{val.name.cyan} on your #{val.wearloc}."
+      end
     end
   end
 
-  attr_accessor :remove
-  def remove(item)
-    if @equipped[item.wearloc].include?(item)
-      puts "To be implemented"
-    end
-  end
+  # attr_accessor :equipped
+  # def equipped
+  #   puts @equipped
+    # @equipped.sort_by {|i| i.type}.each do |item|
+    #   puts "#{item.name} (#{item.type})"
+    #   if item.attack != nil ; puts " %-20s %00d" % ['Attack', item.attack] ; end
+    #   if item.armor != nil ; puts " %-20s %00d" % ['Armor', item.armor] ; end
+    #   if item.wearloc != nil ; puts " %-20s %00s" % ['Wear', item.wearloc] ; end
+    #   if item.weight != nil ; puts " %-20s %00d" % ['Weight', item.weight] ; end
+    #   if item.price != nil ; puts " %-20s %00d" % ['Price', item.price] ; end
+    # end
+  #   nil
+  # end
+
+  # attr_accessor :wear
+  # def wear(item)
+  #   if @possible_wearlocs.include?(item.wearloc)
+  #     @worn[item.wearloc] = item
+  #     puts @worn
+  #   else
+  #     puts "Wear what where?"
+  #   end
+  # end
 
 end
 
 player = Player.new('Chris')
 # puts player.inventory
 puts player.showinventory
-
 puts player.equipped
+player.wear_item("broadsword")
+player.wear_item("ring")
+player.wear_item("breastplate")
+puts player.showinventory
+puts player.equipped
+
+
+# puts "Removing items"
+# puts player.remove_item(@ring)
+# puts player.remove_item(@dagger)
+# puts "Inv/Eq"
+# puts player.showinventory
+# puts player.equipped
 
 # eq.worn["wielding"] = sword
 # puts eq.worn
