@@ -33,7 +33,8 @@ class InputController
 				@current_message = "Sorry, you cannot go #{direction} from here."
 			end
 		when "wear"
-			player.wear
+			keyword = tokens.last
+			player.wear(keyword)
 		when "heal"
 			amount = tokens.last.to_i
 			avatar.heal(amount)
