@@ -1,56 +1,4 @@
-require './util.rb'
 
-class Player
-  attr_accessor :playername, :showinventory
-  def initialize(playername)
-    @playername = playername
-    @inventory = Inventory.new
-    @affects = []
-
-    @broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wielding', 15, 2)
-    @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
-    @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
-    @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
-
-    @inventory.additem(@broadsword)
-    @inventory.additem(@breastplate)
-    @inventory.additem(@ring)
-
-    @equipment = Equipment.new
-  end
-
-  attr_accessor :wear_item
-  def wear_item(keyword)
-    @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) if x.name.include?(keyword)}
-  end
-
-  attr_accessor :remove_item
-  def remove_item(item)
-    if @equipment.equipped.include?(item)
-      @inventory.additem(item)
-      @equipment.worn.delete(item)
-    else
-      puts "You aren't wearing that."
-    end
-  end
-
-  attr_accessor :equipped
-  def equipped
-    @equipment.equipped
-    nil
-  end
-
-  attr_accessor :showinventory
-  def showinventory
-    @inventory.listinventory
-  end
-
-  attr_accessor :affects
-  def affects
-    @affects.active
-  end
-
-end
 
 class Inventory
   attr_accessor :contents
@@ -156,11 +104,11 @@ class Equipment
 
 end
 
-player = Player.new('Chris')
-puts player.showinventory
-puts player.equipped
-player.wear_item("broadsword")
-player.wear_item("ring")
-player.wear_item("breastplate")
-puts player.showinventory
-puts player.equipped
+# player = Player.new('Chris')
+# puts player.showinventory
+# puts player.equipped
+# player.wear_item("broadsword")
+# player.wear_item("ring")
+# player.wear_item("breastplate")
+# puts player.showinventory
+# puts player.equipped

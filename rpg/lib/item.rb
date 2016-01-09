@@ -1,22 +1,12 @@
 class Item
-	attr_accessor :id, :shortname, :desc, :weight, :type, :wearloc, :playeraffects
-  attr_reader :avatar
-
-	def has_room_to_the?(direction)
-		rooms.key?(direction)
-	end
-
-  def list
-    items.inspect
+  attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
+  def initialize(name, type, attack, armor, wearloc, weight, price)
+    @name = name
+    @type = type
+    @attack = attack
+    @armor = armor
+    @wearloc = wearloc
+    @weight = weight
+    @price = price
   end
-
-  def display_room
-    puts description.blue, info.gray
-    puts exits.brown
-  end
-
-  def exits
-    print "Exits: "; rooms.keys.join(" ")
-  end
-
 end

@@ -14,14 +14,16 @@ class InputController
 		# puts "this is the init message".red  # INIT MESSAGE
 	end
 
+	# Begin command evaluation
 	def evaluate(input)
 		tokens = input.split
 		unless valid?(input)
-			@current_message = "Sorry, that is not a valid command."
+			# @current_message = "Sorry, that is not a valid command."
+			puts "Sorry, that is not a valid command."
 			return
 		end
 
-		# Evaluate commands
+		# Evaluate commands & parameters
 		command = tokens.first
 		case command
 		when "go"
@@ -30,11 +32,14 @@ class InputController
 				avatar.move(direction)
 				@current_message = avatar.location.display_room
 			else
-				@current_message = "Sorry, you cannot go #{direction} from here."
+				# @current_message = "Sorry, you cannot go #{direction} from here."
+				puts "Sorry, you cannot go #{direction} from here."
 			end
+		when "equipment", "equip", "eq"
+			avatar.equipped
 		when "wear"
 			keyword = tokens.last
-			player.wear(keyword)
+			avatar.wear_item(keyword)
 		when "heal"
 			amount = tokens.last.to_i
 			avatar.heal(amount)
@@ -46,15 +51,9 @@ class InputController
 		when "look"
 			@current_message = avatar.location.display_room
 		when "test"
-			# @current_message = avatar.location.info
-			# @current_message = avatar.location.roomexits
-			# @current_message = avatar.maxhealth
-			# @current_message = avatar.showstats
-			# avatar.damage(50)
-			# avatar.showstats
-			# avatar.heal(30)
-			# avatar.showstats
 			puts items.inspect
+		when "inventory", "inv"
+			avatar.showinventory
 		when "help"
 			@current_message = @messages["help"]
 		when "exit", "quit"
@@ -64,6 +63,7 @@ class InputController
 
 	end
 
+	# Validate command token.first
 	def valid?(input)
 		tokens = input.split
 		result = false
@@ -75,8 +75,9 @@ class InputController
 		result
 	end
 
+	# Validate command tokens
 	def valid_commands
-		@commands ||= %w(look exit quit test stats heal damage help)
+		@commands ||= %w(look exit quit test stats heal inv inventory equipment equip eq wear remove drop get damage help) # add:  get, drop, wear, wield, remove
 	end
 
 end

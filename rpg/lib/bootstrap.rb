@@ -5,9 +5,10 @@ require File.join(lib_dir, 'input_controller')
 require File.join(lib_dir, 'game_data_loader')
 
 class Bootstrap
-  def initialize(location_data_file, item_data_file, message_data_file)
+  # def initialize(location_data_file, item_data_file, message_data_file)
+  def initialize(location_data_file, message_data_file)
     @locations = loader.load_location_data(location_data_file)
-    @items = loader.load_item_data(item_data_file)
+    # @items = loader.load_item_data(item_data_file)
     @messages = loader.load_message_data(message_data_file)
   end
 
