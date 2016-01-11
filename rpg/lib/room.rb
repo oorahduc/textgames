@@ -6,7 +6,6 @@ class Room
   attr_accessor :objects
   def initialize
     @objects = []
-    puts @objects.class
   end
 
   def has_room_to_the?(direction)
@@ -15,23 +14,19 @@ class Room
 
   def display_room
     puts description.blue, info.gray
-    puts @objects
+    puts listobjects
     puts exits.brown
   end
 
-  # attr_accessor :objects
-  # def objects
-  #   @objects
-  # end
-
   attr_accessor :listobjects
   def listobjects
-    puts @objects
-    # if @objects.empty? == false
-    #   @objects.each { |obj| puts "#{obj.name} lies on the ground." }
-    # else
-    #   return ""
-    # end
+    # puts @objects
+    if @objects.empty? == false
+      @objects.each { |obj| puts "#{obj.name} lies on the ground." }
+    else
+      return ""
+    end
+    nil
   end
 
   def exits

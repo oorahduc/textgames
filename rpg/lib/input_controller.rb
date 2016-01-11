@@ -32,7 +32,6 @@ class InputController
 				avatar.move(direction)
 				@current_message = avatar.location.display_room
 			else
-				# @current_message = "Sorry, you cannot go #{direction} from here."
 				puts "Sorry, you cannot go #{direction} from here."
 			end
 		when "equipment", "equip", "eq"
@@ -68,6 +67,8 @@ class InputController
 			puts avatar.location.objects
 		when "help"
 			@current_message = @messages["help"]
+		when "cmds"
+			puts @commands.join(', ')
 		when "exit", "quit"
 			puts "Thank you for playing!"
 			exit(0)
@@ -89,7 +90,7 @@ class InputController
 
 	# Validate command tokens
 	def valid_commands
-		@commands ||= %w(look l exit quit test stats heal inventory inv i equipment equip eq wear remove rem drop get damage testitems putsroom help) # add:  get, drop, wear, wield, remove
+		@commands ||= %w(look l exit quit cmds test stats heal inventory inv i equipment equip eq wear remove rem drop get damage testitems putsroom help) # add:  get, drop, wear, wield, remove
 	end
 
 end

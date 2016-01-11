@@ -29,7 +29,9 @@ class Avatar
     @inventory.additem(@breastplate)
     @inventory.additem(@ring)
     @inventory.additem(@dagger)
-    @current_room.additem(@dagger)
+    # @current_room.additem(@dagger)
+    # @current_room.objects = []
+    # puts @current_room.objects.class
   end
 
 
@@ -131,8 +133,8 @@ class Avatar
   attr_accessor :equipped
   def equipped
     @equipment.equipped
-    puts @current_room.inspect
-    @current_room.objects.map{|x| puts x}
+    # puts @current_room.inspect
+    # @current_room.objects.map{|x| puts x}
     nil
   end
 
