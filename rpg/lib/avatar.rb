@@ -13,6 +13,13 @@ class Avatar
     @inventory = Inventory.new
     @affects = []
 
+    @equipment = Equipment.new
+  end
+
+
+  # Debug item creation method
+  attr_accessor :createtestitems
+  def createtestitems
     @broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wielding', 15, 2)
     @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
     @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
@@ -21,9 +28,10 @@ class Avatar
     @inventory.additem(@broadsword)
     @inventory.additem(@breastplate)
     @inventory.additem(@ring)
-
-    @equipment = Equipment.new
+    @inventory.additem(@dagger)
+    @current_room.additem(@dagger)
   end
+
 
   def location
     @current_room
@@ -83,20 +91,35 @@ class Avatar
 
   # NEED TO FORMAT THIS ACCORDING TO WEAR_ITEM
   # REWRITE ACCORDING TO FUZZY MATCHING FORMAT
-  def dropitem(itemobject)
-    if @inventory.include?(itemobject)
-
-      # Temporarily save object to drop to the room.
-      @tmp = itemobject
-
-      # Pop item out of inventory
-      @inventory.delete(itemobject)
-
-      # Add item to room.
-      @location.additem(itemobject) # ******** PSEUDO CODE
-    else
+  attr_accessor :dropitem
+  def dropitem(keyword)
+    begin
+      @inventory.contents.map{|x| @current_room.objects << x if x.name.include?(keyword)}
+    rescue
+      puts "something happened at room put."
+    end
+    begin
+      # @current_room.objects.map{|x| puts x}
+      @inventory.contents.map{|x| @inventory.contents.delete(x) if x.name.include?(keyword)}
+    rescue
       puts "You can't find it."
     end
+
+    # begin
+    #   @inventory.contents.map{|x| @inventory.contents.delete(x) and location.objects << x if x.name.include?(keyword)}
+    # # if @inventory.include?(itemobject)
+
+    # #   # Temporarily save object to drop to the room.
+    # #   @tmp = itemobject
+
+    # #   # Pop item out of inventory
+    # #   @inventory.delete(itemobject)
+
+    # #   # Add item to room.
+    # #   @location.additem(itemobject) # ******** PSEUDO CODE
+    # rescue
+    #   puts "You can't find it."
+    # end
   end
 
   # NEED TO FORMAT THIS ACCORDING TO WEAR_ITEM
@@ -108,6 +131,8 @@ class Avatar
   attr_accessor :equipped
   def equipped
     @equipment.equipped
+    puts @current_room.inspect
+    @current_room.objects.map{|x| puts x}
     nil
   end
 
@@ -122,36 +147,6 @@ class Avatar
   attr_accessor :affects
   def affects
     @affects.active
-  end
-
-  # Avatar class call to damage avatar's hitpoints
-  def damage(damage)
-    @hitpoints -= damage
-    puts "Ouch! #{damage} damage taken!"
-    # dead?
-  end
-
-  # avatar class call to heal avatar's hitpoints
-  def heal(healing)
-    if healing >= @maxhitpoints - @hitpoints
-      healing = @maxhitpoints - @hitpoints
-      @hitpoints += healing
-      puts "Yay! +#{healing} to health!"
-    else
-      @hitpoints += healing
-      puts "Yay! +#{healing} to health!"
-    end
-  end
-
-  # Check to see if avatar is dead.
-  # May need to be moved to Combat module in the future.
-  def dead?
-    if @hitpoints <= 0
-      puts "You DIED!!"
-      exit
-      # elsif @hitpoints > 0 then
-      #   next
-    end
   end
 
 end

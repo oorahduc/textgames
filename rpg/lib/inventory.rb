@@ -10,6 +10,12 @@ class Inventory
     nil
   end
 
+  attr_accessor :delitem
+  def delitem(item)
+    @contents.delete(item)
+    nil
+  end
+
   attr_accessor :listinventory
   def listinventory
     puts "Inventory".blue
@@ -66,7 +72,7 @@ class Inventory
   end
 end
 
-
+### For reference later
 # player = Player.new('Chris')
 # puts player.showinventory
 # puts player.equipped

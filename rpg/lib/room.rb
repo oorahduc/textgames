@@ -1,10 +1,12 @@
 class Room
-  attr_accessor :description, :rooms, :items, :info, :handle
+  attr_accessor :description, :rooms, :info, :handle
   attr_writer :starting_location
   attr_reader :avatar
 
+  attr_accessor :objects
   def initialize
-    @roomitems = Roomitems.new
+    @objects = []
+    puts @objects.class
   end
 
   def has_room_to_the?(direction)
@@ -13,11 +15,40 @@ class Room
 
   def display_room
     puts description.blue, info.gray
+    puts @objects
     puts exits.brown
   end
 
+  # attr_accessor :objects
+  # def objects
+  #   @objects
+  # end
+
+  attr_accessor :listobjects
+  def listobjects
+    puts @objects
+    # if @objects.empty? == false
+    #   @objects.each { |obj| puts "#{obj.name} lies on the ground." }
+    # else
+    #   return ""
+    # end
+  end
+
   def exits
-    print "Exits: "; rooms.keys.join(" ")
+    print "Exits: "
+    rooms.keys.join(" ")
+  end
+
+  attr_accessor :additem
+  def additem(item)
+    @objects << item
+    # puts @objects.class
+    nil
+  end
+
+  attr_accessor :delitem
+  def delitem(item)
+    @objects.delete(item)
   end
 
   def starting_location?
@@ -25,19 +56,19 @@ class Room
   end
 end
 
-class Roomitems
-  attr_accessor :contents
-  def initialize
-    @contents = []
-  end
+# class RoomObjects
+#   attr_accessor :contents
+#   def initialize
+#     @contents = []
+#   end
 
-  attr_accessor :put
-  def put(item)
-    @contents << item
-  end
+#   attr_accessor :put
+#   def put(item)
+#     @contents << item
+#   end
 
-  attr_accessor :remove
-  def remove(item)
-    @contents.delete(item)
-  end
-end
+#   attr_accessor :remove
+#   def remove(item)
+#     @contents.delete(item)
+#   end
+# end

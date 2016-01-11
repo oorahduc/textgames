@@ -59,6 +59,7 @@ class GameDataLoader
     room.handle = room_data["handle"]
     room.description = room_data["desc"]
     room.info = room_data["info"]
+    room.objects = room_data["objects"]
     room.rooms = room_data["rooms"]
     room.starting_location = room_data["starting_location"]
     room
