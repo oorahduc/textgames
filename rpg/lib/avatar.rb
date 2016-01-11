@@ -20,15 +20,21 @@ class Avatar
   # Debug item creation method
   attr_accessor :createtestitems
   def createtestitems
-    @broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wielding', 15, 2)
-    @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
-    @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
-    @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
+    # @broadsword = Item.new('a heavy broadsword', 'weapon', 5, 0, 'wielding', 15, 2)
+    # @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
+    # @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
+    # @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
+    @broadsword = Item.new({'name' => 'a heavy broadsword', 'type' => 'weapon', 'attack' => 5, 'armor' => 0, 'wearloc' => 'wielding', 'weight' => 15, 'price' => 2})
+    # @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
+    # @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
+    # @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
+    puts @broadsword.inspect
+
 
     @inventory.additem(@broadsword)
-    @inventory.additem(@breastplate)
-    @inventory.additem(@ring)
-    @inventory.additem(@dagger)
+    # @inventory.additem(@breastplate)
+    # @inventory.additem(@ring)
+    # @inventory.additem(@dagger)
     # @current_room.additem(@dagger)
     # @current_room.objects = []
     # puts @current_room.objects.class
@@ -95,8 +101,11 @@ class Avatar
   # REWRITE ACCORDING TO FUZZY MATCHING FORMAT
   attr_accessor :dropitem
   def dropitem(keyword)
+    # puts location.objects
+    # puts @inventory.contents.inspect
     begin
-      @inventory.contents.map{|x| @current_room.objects << x if x.name.include?(keyword)}
+      @inventory.contents.map{|x| location.objects << x if x.name.include?(keyword)}
+      # puts location.objects
     rescue
       puts "something happened at room put."
     end
@@ -127,6 +136,20 @@ class Avatar
   # NEED TO FORMAT THIS ACCORDING TO WEAR_ITEM
   attr_accessor :getitem
   def getitem(keyword)
+    # puts location.objects
+    # puts @inventory.contents.inspect
+    begin
+      location.objects.map{|x| @inventory.contents << x if x.name.include?(keyword)}
+      # puts location.objects
+    rescue
+      puts "something happened at room put."
+    end
+    begin
+      # @current_room.objects.map{|x| puts x}
+      location.objects.map{|x| location.objects.delete(x) if x.name.include?(keyword)}
+    rescue
+      puts "You can't find it."
+    end
   end
 
   # Returns formatted list of worn equipment

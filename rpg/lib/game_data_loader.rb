@@ -41,18 +41,19 @@ class GameDataLoader
     end
   end
 
-  def build_item(item_data)
-    item = get_item
-    # puts item_data
-    item.id = item_data["id"]
-    item.shortname = item_data["shortname"]
-    item.desc = item_data["desc"]
-    item.weight = item_data["weight"]
-    item.type = item_data["type"]
-    item.wearloc = item_data["wearloc"]
-    item.playeraffects = item_data["playeraffects"]
-    item
-  end
+def build_item(item_data)
+  puts item_data
+  # item = get_item
+  item = Item.new(item_data)
+  # item.name = item_data['name']
+  # item.type = item_data['type']
+  # item.attack = item_data['attack']
+  # item.armor = item_data['armor']
+  # item.wearloc = item_data['wearloc']
+  # item.weight = item_data['weight']
+  # item.price = item_data['price']
+  item
+end
 
   def build_room(room_data)
     room = get_room
@@ -60,6 +61,35 @@ class GameDataLoader
     room.description = room_data["desc"]
     room.info = room_data["info"]
     room.objects = []
+    if room_data["objects"]
+      room_data["objects"].each do |obj|
+        thisobj = Hash[obj[1]]
+        puts thisobj.class
+        puts thisobj
+
+        room.objects << build_item(thisobj)
+        # tmpobj = Hash.new
+        # tmpobj = obj[1]
+        # puts tmpobj.class
+        # puts tmpobj.inspect
+        # build_item(tmpobj.to_s)
+        # # puts tmpobj
+      end
+      # room.objects = room_data["objects"].each do |obj|
+      #   # obj.delete(obj[0])
+      #   # puts obj
+      #   @buildobjs = Array.new
+      #   @buildobjs << obj[1].to_a
+      #   # puts obj
+      #   puts @buildobjs.inspect
+      #   # @buildobjs.each {|i| build_item(i)}
+      # end
+    # puts @buildobjs
+    # if room_data["objects"]
+    #   room.objects = room_data["objects"].each {|obj| build_item(obj)}
+    elsif !room_data["objects"]
+      room.objects = []
+    end
     room.rooms = room_data["rooms"]
     room.starting_location = room_data["starting_location"]
     room

@@ -21,8 +21,9 @@ class Room
   attr_accessor :listobjects
   def listobjects
     # puts @objects
-    if @objects.empty? == false
-      @objects.each { |obj| puts "#{obj.name} lies on the ground." }
+    if @objects
+      # @objects.each { |obj| puts "#{obj.name} lies on the ground." }
+      @objects.each { |obj| puts " #{obj.name} lies on the ground here." }
     else
       return ""
     end
