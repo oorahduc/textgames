@@ -28,6 +28,14 @@
   desc: An old abandoned shrine
   info: You are in an old abandoned shrine. There are cryptic scrawlings all along the walls and ceiling. How were they written on the ceiling? The only way back is north.
   objects:
+    scimitar:
+      name: an ornate scimitar
+      type: weapon
+      attack: 10
+      armor: 0
+      wearloc: wielding
+      weight: 6
+      price: 20
   rooms:
     north: lake
 -

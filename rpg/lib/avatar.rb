@@ -78,46 +78,11 @@ class Avatar
   attr_accessor :remove_item
   def remove_item(keyword)
     begin
-      # @equipment.worn.map{|x| @inventory.contents.additem(x) and @equipment.worn[x.wearloc] = [] if x.name.include?(keyword)}
-      # @equipment.worn.each.map{|x| puts x if x.name.include?(keyword)}
-      # puts @equipment.worn.each { |loc| puts loc.inspect }
-      # puts @equipment.worn["wielding"].name
-
       @equipment.worn.map.each { |x| o = x[1] and @inventory.contents << o and @equipment.worn.delete(o.wearloc) if x[1].name.include?(keyword) }
-      # @equipment.worn.map.each do |x|
-      #   o = x[1]
-      #   @inventory.contents << o
-      #   @equipment.worn.delete(o.wearloc)
-      #   puts @equipment.worn.inspect
-      #   puts o.name
-      # end
-
-      # @equipment.worn.map.each { |x| o = x[1] and puts o.inspect and @inventory.contents.additem(o) if o.name.include?(keyword) }
-      # puts @equipment.worn.map.each { |x| puts x[1].name }
-      # @equipment.worn.map.each { |x| @inventory.contents.additem(x) and @equipment.worn.map.each { |x| @equipment.worn.delete[x.wearloc] if x[1].name.include?(keyword)}}
       puts "Removed."
     rescue
       puts "Huh?"
     end
-
-    # # @equipment.worn.map{|x| puts x if x.name.include?(keyword) }
-    # begin
-    #   # @equipment.worn.map{|x| @inventory.contents.additem(x) and @equipment.worn[x.wearloc] = nil if x.name.include?(keyword)}
-    #   @equipment.worn.map{|x| @inventory.contents.additem(x) if x.name.include?(keyword)}
-    #   puts @equipment.worn['finger'].inspect
-
-    #   puts "Removed."
-    # rescue
-    #   puts "Huh?"
-    #   # puts @equipment.worn.map{|x| puts @equipment.worn.inspect}
-    # end
-
-    # # if @equipment.equipped.include?(item)
-    # #   @inventory.additem(item)
-    # #   @equipment.worn.delete(item)
-    # # else
-    # #   puts "You aren't wearing that."
-    # # end
   end
 
   #
