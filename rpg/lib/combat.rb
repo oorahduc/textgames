@@ -1,10 +1,10 @@
-module Combatable
+module Combat
   # BASE_STATS = {
   #   max_hit_points: 10,
   #   attack_power:   1
   # }
 
-  def Combatable.included(mod)
+  def Combat.included(mod)
     attr_accessor :hit_points, :attack_power
   end
 

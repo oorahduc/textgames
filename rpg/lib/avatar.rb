@@ -1,8 +1,10 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'inventory')
 require File.join(File.expand_path(File.dirname(__FILE__)), 'equipment')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'combat')
 require File.join(File.expand_path(File.dirname(__FILE__)), 'util')
 
 class Avatar
+  include Combat
   attr_accessor :avatar_name
   def initialize(name, starting_location)
     @current_room = starting_location
@@ -10,12 +12,12 @@ class Avatar
     @hitpoints = 300
     @maxhitpoints = 300
 
-    @inventory = Inventory.new
     @affects = []
+    @avatar_attr = {:str => 10, :end => 10}
 
+    @inventory = Inventory.new
     @equipment = Equipment.new
   end
-
 
   # Debug item creation method
   attr_accessor :createtestitems
@@ -24,31 +26,26 @@ class Avatar
     # @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
     # @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
     # @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
-    @broadsword = Item.new({'name' => 'a heavy broadsword', 'type' => 'weapon', 'attack' => 5, 'armor' => 0, 'wearloc' => 'wielding', 'weight' => 15, 'price' => 2})
-    # @breastplate = Item.new('a mithril breastplate', 'armor', 0, 10, 'torso', 15, 5)
-    # @ring = Item.new('a gold ring', 'armor', 0, 3, 'finger', 2, 20)
-    # @dagger = Item.new('a dagger', 'weapon', 3, 0, 'wielding', 5, 2)
-    puts @broadsword.inspect
 
+    @broadsword = Item.new({'name' => 'a heavy broadsword', 'type' => 'weapon', 'attack' => 5, 'armor' => 0, 'wearloc' => 'wielding', 'weight' => 15, 'price' => 2})
+    @breastplate = Item.new({'name' => 'a mithril breastplate', 'type' => 'armor', 'attack' => 0, 'armor' => 15, 'wearloc' => 'torso', 'weight' => 18, 'price' => 30})
 
     @inventory.additem(@broadsword)
-    # @inventory.additem(@breastplate)
-    # @inventory.additem(@ring)
-    # @inventory.additem(@dagger)
-    # @current_room.additem(@dagger)
-    # @current_room.objects = []
-    # puts @current_room.objects.class
+    @inventory.additem(@breastplate)
+
   end
 
-
+  # Avatar's current location
   def location
     @current_room
   end
 
+  # Confirm Avatar can move in a particular direction
   def can_move?(direction)
     @current_room.has_room_to_the?(direction)
   end
 
+  # Avatar Method to move avatar in a direction, to a new room
   def move(direction)
     if can_move?(direction)
       new_room = @current_room.rooms[direction]
@@ -59,12 +56,19 @@ class Avatar
     end
   end
 
+  attr_accessor :stats
+  def stats
+    puts "You are #{@avatar_name}."
+    puts "You have #{@avatar_attr[:str]} strength and #{@avatar_attr[:end]} endurance."
+    puts "You have #{hitpoints} hitpoints"
+  end
+
   attr_accessor :hitpoints
   def hitpoints
     @hitpoints
   end
 
-  #
+  # Avatar Method to wear item by matched keyword
   attr_accessor :wear_item
   def wear_item(keyword)
     begin
@@ -74,7 +78,7 @@ class Avatar
     end
   end
 
-  #
+  # Avatar Method to remove item by matched keyword
   attr_accessor :remove_item
   def remove_item(keyword)
     begin
@@ -85,7 +89,7 @@ class Avatar
     end
   end
 
-  #
+  # Avatar Method to drop item by matched keyword
   attr_accessor :dropitem
   def dropitem(keyword)
     begin
@@ -100,7 +104,7 @@ class Avatar
     end
   end
 
-  #
+  # Avatar Method to get item by matched keyword
   attr_accessor :getitem
   def getitem(keyword)
     begin
