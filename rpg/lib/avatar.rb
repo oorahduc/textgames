@@ -64,17 +64,17 @@ class Avatar
     @hitpoints
   end
 
+  #
   attr_accessor :wear_item
   def wear_item(keyword)
     begin
-      @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) if x.name.include?(keyword)}
-      puts "Equipped."
+      @inventory.contents.map{|x| @equipment.worn[x.wearloc] = x and @inventory.contents.delete(x) and puts "You equipped #{x.name}." if x.name.include?(keyword)}
     rescue
       puts "Huh?"
     end
   end
 
-  ############# MUST IMPLEMENT THIS PROPERLY
+  #
   attr_accessor :remove_item
   def remove_item(keyword)
     begin
