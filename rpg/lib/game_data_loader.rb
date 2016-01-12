@@ -41,10 +41,10 @@ class GameDataLoader
     end
   end
 
-def build_item(item_data)
-  item = Item.new(item_data)
-  item
-end
+  def build_item(item_data)
+    item = Item.new(item_data)
+    item
+  end
 
   def build_room(room_data)
     room = get_room

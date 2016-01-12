@@ -1,6 +1,6 @@
 # 'RPG' (working title)
 
-A text adventure game a'la Zork and later MUD iterations like SMAUG. 
+A text adventure game a'la Zork and later MUD iterations like SMAUG.
 
 ## How to play
 
@@ -17,7 +17,7 @@ Since forking from bitops' text-adventures, the following features have been add
 
 ## TODO
 
-- Enemies
+- Creature class for mobs
 - Combat system
 - Item affects applied to player (weapon attack damage)
 - Player attributes
