@@ -1,22 +1,25 @@
-Engine
-Input
-Item class
-Avatar class
-Equipment class
-Inventory class
-
-
 # 'RPG' (working title)
 
-A text adventure game
+A text adventure game a'la Zork and later MUD iterations like SMAUG. 
 
 ## How to play
 
 Run the 'play' shell script in the root directory.
 
+## Game Details
+
+Since forking from bitops' text-adventures, the following features have been added:
+
+1. Health
+2. Inventory
+3. Items (in player inventory, in rooms)
+4. Equipment
+
 ## TODO
 
-- Implement objects in rooms, get, drop
+- Enemies
+- Combat system
+- Item affects applied to player (weapon attack damage)
 - Player attributes
 
 ## Contributing
