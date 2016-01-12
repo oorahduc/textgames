@@ -48,6 +48,9 @@ class InputController
 		when "get"
 			keyword = tokens.last
 			avatar.getitem(keyword)
+		when "remove"
+			keyword = tokens.last
+			avatar.remove_item(keyword)
 		when "heal"
 			amount = tokens.last.to_i
 			avatar.heal(amount)
