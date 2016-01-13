@@ -4,6 +4,9 @@ module Equipment
     def initialize
       @worn = Hash.new
       @possible_wearlocs = ["head", "torso", "finger", "wielding"]
+
+      @vowels = "aeiou"
+      @articles = ['a', 'an']
     end
 
     # Equipped class
@@ -62,10 +65,15 @@ module Equipment
     private
     def listeq
       @worn.each do |key, val|
-        if val.wearloc == "wielding"
-          puts "You are wielding #{val.name.red}."
+        if @vowels.include?(val.name[0])
+          @article = @articles[1]
         else
-          puts "You are wearing #{val.name.cyan} on your #{val.wearloc}."
+          @article = @articles[0]
+        end
+        if val.wearloc == "wielding"
+          puts "You are wielding #{@article} #{val.name.red}."
+        else
+          puts "You are wearing #{@article} #{val.name.cyan} on your #{val.wearloc}."
         end
       end
     end

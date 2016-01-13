@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'room')
 require File.join(File.dirname(__FILE__), 'item')
+require File.join(File.dirname(__FILE__), 'npc')
 require 'yaml'
 
 class GameDataLoader
@@ -45,6 +46,25 @@ class GameDataLoader
     item
   end
 
+  def build_npc(npc_data)
+    npc = Npc.new(npc_data)
+    npc
+  end
+
+  # def build_each_item(objects)
+  #   objects.each do |obj|
+  #     thisobj = Hash[obj[1]]
+  #     room.objects << build_item(thisobj)
+  #   end
+  # end
+
+  # def build_each_npc(npc_data)
+  #   npc_data.each do |npc|
+  #     room.npcs << build_npc(npc)
+  #   end
+  # end
+
+  # This could be cleaned up with by separating into multiple methods
   def build_room(room_data)
     room = get_room
     room.handle = room_data["handle"]
@@ -59,6 +79,14 @@ class GameDataLoader
     elsif !room_data["objects"]
       room.objects = []
     end
+    room.npcs = []
+    if room_data["npcs"]
+      room_data["npcs"].each do |npc|
+        room.npcs << build_npc(npc)
+      end
+    elsif !room_data["npcs"]
+      room.npcs = []
+    end
     room.rooms = room_data["rooms"]
     room.starting_location = room_data["starting_location"]
     room
@@ -72,6 +100,11 @@ class GameDataLoader
   private
   def get_item
     Item.new
+  end
+
+  private
+  def get_npc
+    Npc.new
   end
 
   def load_yaml(file)

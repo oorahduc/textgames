@@ -10,8 +10,8 @@ end
 
 # TODO: this could be a little nicer.
 location_data_file = loaddata "#{ARGV[0]}"
-item_data_file = loaddata "#{ARGV[1]}"
-message_data_file = loaddata "#{ARGV[2]}"
+# item_data_file = loaddata "#{ARGV[1]}"
+message_data_file = loaddata "#{ARGV[1]}"
 
 # main
 # bootstrap = Bootstrap.new(location_data_file, item_data_file, message_data_file)

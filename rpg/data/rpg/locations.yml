@@ -5,7 +5,7 @@
   info: A trail runs to the north from here.
   objects:
     dagger:
-      name: a dagger
+      name: sharp dagger
       type: weapon
       attack: 5
       armor: 0
@@ -13,13 +13,22 @@
       weight: 2
       price: 10
     ring:
-      name: a ring
+      name: shiny ring
       type: armor
       attack: 0
       armor: 3
       wearloc: finger
       weight: 1
       price: 15
+  npcs:
+    - name: old man
+      desc: A rickity old man in a dark grey robe.
+      attack: 3
+      defense: 5
+    - name: tabby cat
+      desc: A cute little tabby stares at you.
+      attack: 1
+      defense: 8
   rooms:
     north: forest
     south: shrine
@@ -36,6 +45,7 @@
       wearloc: wielding
       weight: 6
       price: 20
+  npcs:
   rooms:
     north: lake
 -
@@ -43,6 +53,7 @@
   desc: A forest full of lush trees.
   info: The path splits. To the west lies your home. To the east are the mountains. Back to the south is a lake.
   objects:
+  npcs:
   rooms:
     west: home
     east: mountains
@@ -52,6 +63,7 @@
   desc: Your home. It is a happy house.
   info: Your house is here. It is a quiet place. To the east is the path in the forest. If you go west you will enter your house.
   objects:
+  npcs:
   rooms:
     east: forest
     west: home_main
@@ -60,6 +72,7 @@
   desc: You are standing in the main room of your house.
   info: The inside of your house is simple but clean and quiet. You have spent many happy hours here. The study is in the north room.
   objects:
+  npcs:
   rooms:
     north: home_study
     east: home
@@ -68,6 +81,7 @@
   desc: You are in your study. It is a clean room with a desk and windows facing outside.
   info: Your study is where your work gets done. There is a letter on your desk.
   objects:
+  npcs:
   rooms:
     south: home_main
 -
@@ -75,6 +89,7 @@
   desc: These are the mountains. From up here you can see the valley in which you live.
   info: Further to the east is the pass that leads to the ocean. Back west is the forest.
   objects:
+  npcs:
   rooms:
     west: forest
     east: pass
@@ -83,6 +98,7 @@
   desc: This is the pass that leads to the ocean. It is rocky terrain with huge stone walls all around.
   info: To the east is the ocean. Back west lies the mountains. You can smell the ocean.
   objects:
+  npcs:
   rooms:
     west: mountains
     east: ocean
@@ -91,6 +107,7 @@
   desc: You are standing by the ocean. It is overcast and cloudy here. Seagulls circle overhead.
   info: Further east along the beach you can see some buildings. Back to the west lies the pass.
   objects:
+  npcs:
   rooms:
     west: pass
     east: village
@@ -99,5 +116,6 @@
   desc: You are standing among the buildings of an abandoned village.
   info: There is a strange glowing crystal lying on the ground.
   objects:
+  npcs:
   rooms:
     west: ocean

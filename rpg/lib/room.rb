@@ -3,9 +3,13 @@ class Room
   attr_writer :starting_location
   attr_reader :avatar
 
-  attr_accessor :objects
+  attr_accessor :objects, :npcs
   def initialize
     @objects = []
+    @npcs = []
+
+    @name_articles = ['A', 'An']
+    @vowels = "aeiou"
   end
 
   def has_room_to_the?(direction)
@@ -14,18 +18,37 @@ class Room
 
   def display_room
     puts description.blue, info.gray
-    puts listobjects
     puts exits.brown
+    listnpcs
+    listobjects
   end
 
-  attr_accessor :listobjects
+  # attr_accessor :listnpcs
+  def listnpcs
+    unless !@npcs
+      @npcs.each do |npc|
+        if @vowels.include?(npc.name[0])
+          @article = @name_articles[1]
+        else
+          @article = @name_articles[0]
+        end
+        puts " #{@article} #{npc.name} stands here.".magenta
+      end
+    end
+    nil
+  end
+
+  # attr_accessor :listobjects
   def listobjects
-    # puts @objects
     if @objects
-      # @objects.each { |obj| puts "#{obj.name} lies on the ground." }
-      @objects.each { |obj| puts " #{obj.name} lies on the ground here." }
-    else
-      return ""
+      @objects.each do |obj|
+        if @vowels.include?(obj.name[0])
+          @article = @name_articles[1]
+        else
+          @article = @name_articles[0]
+        end
+        puts "#{@article} #{obj.name} lies on the ground here."
+      end
     end
     nil
   end
@@ -35,14 +58,14 @@ class Room
     rooms.keys.join(" ")
   end
 
-  attr_accessor :additem
+  # attr_accessor :additem
   def additem(item)
     @objects << item
     # puts @objects.class
     nil
   end
 
-  attr_accessor :delitem
+  # attr_accessor :delitem
   def delitem(item)
     @objects.delete(item)
   end
@@ -51,20 +74,3 @@ class Room
     @starting_location
   end
 end
-
-# class RoomObjects
-#   attr_accessor :contents
-#   def initialize
-#     @contents = []
-#   end
-
-#   attr_accessor :put
-#   def put(item)
-#     @contents << item
-#   end
-
-#   attr_accessor :remove
-#   def remove(item)
-#     @contents.delete(item)
-#   end
-# end

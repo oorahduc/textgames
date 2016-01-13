@@ -1,13 +1,13 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'inventory')
-require File.join(File.expand_path(File.dirname(__FILE__)), 'equipment')
+# require File.join(File.expand_path(File.dirname(__FILE__)), 'inventory')
+# require File.join(File.expand_path(File.dirname(__FILE__)), 'equipment')
 require File.join(File.expand_path(File.dirname(__FILE__)), 'combat')
 require File.join(File.expand_path(File.dirname(__FILE__)), 'util')
 
 class Creature
   include Combat
 
-  attr_accessor :creature_name
-  def initialize(object)
+  attr_accessor :name
+  def initialize(name)
     @current_room = starting_location
     @name = object['name']
     @attack = object['attack']
