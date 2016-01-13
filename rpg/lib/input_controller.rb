@@ -62,7 +62,7 @@ class InputController
 		when "look", "l"
 			@current_message = avatar.location.display_room
 		when "test"
-			puts items.inspect
+			avatar.inventory.inventory
 		when "inventory", "inv", "i"
 			avatar.showinventory
 		when "testitems"

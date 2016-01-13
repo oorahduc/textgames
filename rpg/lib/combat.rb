@@ -15,12 +15,12 @@ module Combat
     # @attack_power = stats[:attack_power]
   end
 
+  # Check if monster alive?
   def monster_alive?
     @monster_hitpoints > 0
   end
 
-  # Check to see if avatar is dead.
-  # May need to be moved to Combat module in the future.
+  # Check if avatar alive?
   def alive?
     if @hitpoints <= 0
       puts "You DIED!!"
@@ -30,14 +30,14 @@ module Combat
     end
   end
 
-  # Avatar class call to damage avatar's hitpoints
+  # Cause damage
   def damage(damage)
     @hitpoints -= damage
     puts "Ouch! #{damage} damage taken!"
     # alive?
   end
 
-  # avatar class call to heal avatar's hitpoints
+  # Heal health
   def heal(healing)
     if healing >= @maxhitpoints - @hitpoints
       healing = @maxhitpoints - @hitpoints

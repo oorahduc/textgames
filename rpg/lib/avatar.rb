@@ -5,6 +5,7 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'util')
 
 class Avatar
   include Combat
+  include Equipment
   attr_accessor :avatar_name
   def initialize(name, starting_location)
     @current_room = starting_location
@@ -62,11 +63,6 @@ class Avatar
     puts "You are #{@avatar_name}."
     puts "You have #{@avatar_attr[:str]} strength and #{@avatar_attr[:end]} endurance."
     puts "You have #{hitpoints} hitpoints"
-  end
-
-  attr_accessor :hitpoints
-  def hitpoints
-    @hitpoints
   end
 
   # Avatar Method to wear item by matched keyword
@@ -130,6 +126,11 @@ class Avatar
   attr_accessor :showinventory
   def showinventory
     @inventory.listinventory
+  end
+
+  attr_accessor :inventory
+  def inventory
+    @inventory
   end
 
   # Returns formatted list of affects on avatar

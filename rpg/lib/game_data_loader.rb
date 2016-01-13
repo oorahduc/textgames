@@ -13,7 +13,6 @@ class GameDataLoader
   def load_item_data(file)
     data = load_yaml(file)
     items = load_initial_itemstate(data)
-    # establish_relationships(items)
     items
   end
 

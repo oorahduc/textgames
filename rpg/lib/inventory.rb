@@ -28,8 +28,8 @@ class Inventory
     nil
   end
 
-  attr_accessor :inventory
-  def inventory
+  attr_accessor :exam_inventory
+  def exam_inventory
     @contents.sort_by {|i| i.type}.each do |item|
       puts "#{item.name} (#{item.type})"
       if item.attack != nil ; puts " %-20s %00d" % ['Attack', item.attack] ; end
@@ -72,12 +72,3 @@ class Inventory
   end
 end
 
-### For reference later
-# player = Player.new('Chris')
-# puts player.showinventory
-# puts player.equipped
-# player.wear_item("broadsword")
-# player.wear_item("ring")
-# player.wear_item("breastplate")
-# puts player.showinventory
-# puts player.equipped

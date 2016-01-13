@@ -23,22 +23,36 @@ class Item
   end
 end
 
-# class Potion < Item
-#   def initialize
-#     @name = "potion"
-#   end
-
-#   def perform_item_effect(player)
-#     player.heal(10)
-#   end
-# end
-
-# class Sword < Item
-#   def initialize
-#     @name = "sword"
-#   end
-
-#   def perform_item_effect(player)
-#     player.attack_power += 1
+# class Item
+#   attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
+#   def initialize(object)
+#     @name = object['name']
+#     @type = object['type']
+#     @attack = object['attack']
+#     @armor = object['armor']
+#     @wearloc = object['wearloc']
+#     @weight = object['weight']
+#     @price = object['price']
 #   end
 # end
+
+
+class Potion < Item
+  def initialize
+    @name = "potion"
+  end
+
+  def perform_item_effect(player)
+    player.heal(10)
+  end
+end
+
+class Sword < Item
+  def initialize
+    @name = "sword"
+  end
+
+  def perform_item_effect(player)
+    player.attack_power += 1
+  end
+end
