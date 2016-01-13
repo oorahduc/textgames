@@ -13,6 +13,7 @@ class Avatar
     @maxhitpoints = 300
 
     @affects = []
+
     @avatar_attr = {:str => 10, :end => 10}
 
     @inventory = Inventory.new
