@@ -3,7 +3,7 @@ module Equipment
     attr_accessor :worn, :equipped, :possible_wearlocs
     def initialize
       @worn = Hash.new
-      @possible_wearlocs = ["head", "torso", "finger", "wielding"]
+      @possible_wearlocs = ["head", "neck", "shoulders", "torso", "arms", "hands", "finger", "legs", "feet", "wielding"]
 
       @vowels = "aeiou"
       @articles = ['a', 'an']
