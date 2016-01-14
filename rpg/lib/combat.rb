@@ -9,10 +9,28 @@ module Combat
   end
 
   def initialize_stats(stats)
-    # @stats = stats
+  end
 
-    # @hit_points   = stats[:max_hit_points]
-    # @attack_power = stats[:attack_power]
+  # MUST BE REFACTORED
+  def init_combat(opponents)
+    attack_turn = 0
+    while opponents.all?(&:is_alive?)
+    attacker = opponents[attack_turn]
+    defender = opponents[(attack_turn + 1) % 2]
+
+    attack = attacker.attack(defender)
+    defender.defend(attack)
+    puts "#{attacker.name} hit #{defender.name} with #{attack} points of damage!"
+    puts "#{defender.name} regenerates #{defender.regen} points of life!" if defender.is_alive?
+
+    puts "Hit points:"
+    opponents.each { |o| puts "#{o.name}: #{o.life}" }
+
+    attack_turn = (attack_turn + 1) % 2
+    end
+
+    winner = opponents.first(&:is_alive?)
+    puts winner.name
   end
 
   # Check if monster alive?
@@ -25,9 +43,17 @@ module Combat
     if @hitpoints <= 0
       puts "You DIED!!"
       exit
-      # elsif @hitpoints > 0 then
-      #   next
     end
+  end
+
+  # PSEUDO CODE. NOT YET IMPLEMENTED.
+  def attack(defender)
+    [@attr[:str] + @weapon.attack - defender.armor, 0].max
+  end
+
+  # PSEUDO CODE. NOT YET IMPLEMENTED.
+  def defend(attack)
+    @hitpoints -= attack
   end
 
   # Cause damage
@@ -39,13 +65,14 @@ module Combat
 
   # Heal health
   def heal(healing)
+    @healmsg = "Yay! +#{healing} to health!"
     if healing >= @maxhitpoints - @hitpoints
       healing = @maxhitpoints - @hitpoints
       @hitpoints += healing
-      puts "Yay! +#{healing} to health!"
+      puts @healmsg
     else
       @hitpoints += healing
-      puts "Yay! +#{healing} to health!"
+      puts @healmsg
     end
   end
 end

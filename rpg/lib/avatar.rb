@@ -8,17 +8,16 @@ class Avatar
   include Equipment
   attr_accessor :avatar_name
   def initialize(name, starting_location)
-    @current_room = starting_location
-    @avatar_name = name
-    @hitpoints = 300
-    @maxhitpoints = 300
+    @avatar_name    = name
+    @current_room   = starting_location
+    @hitpoints      = 300
+    @maxhitpoints   = 300
 
-    @affects = []
+    @affects        = []
+    @avatar_attr    = [:str => rand(7..22), :end => rand(7..22)]
 
-    @avatar_attr = {:str => 10, :end => 10}
-
-    @inventory = Inventory.new
-    @equipment = Equipment.new
+    @inventory      = Inventory.new
+    @equipment      = Equipment.new
   end
 
   # Debug item creation method
@@ -57,6 +56,8 @@ class Avatar
       false
     end
   end
+
+  def interact(action)
 
   attr_accessor :stats
   def stats
