@@ -77,7 +77,5 @@ module Equipment
         end
       end
     end
-
   end
-
 end

@@ -25,10 +25,12 @@
       desc: A rickity old man in a dark grey robe.
       attack: 3
       defense: 5
+      hitpoints: 100
     - name: tabby cat
       desc: A cute little tabby stares at you.
       attack: 1
       defense: 8
+      hitpoints: 20
   rooms:
     north: forest
     south: shrine

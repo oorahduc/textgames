@@ -39,7 +39,7 @@ module Combat
   end
 
   # Check if avatar alive?
-  def alive?
+  def is_alive?
     if @hitpoints <= 0
       puts "You DIED!!"
       exit

@@ -6,18 +6,20 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'util')
 class Avatar
   include Combat
   include Equipment
-  attr_accessor :avatar_name
+  attr_accessor :avatar_name, :name
   def initialize(name, starting_location)
-    @avatar_name    = name
-    @current_room   = starting_location
-    @hitpoints      = 300
-    @maxhitpoints   = 300
+    @current_room = starting_location
+    @avatar_name = name
+    @name = @avatar_name
+    @hitpoints = 300
+    @maxhitpoints = 300
+    @base_attack = rand(5..10)
 
-    @affects        = []
-    @avatar_attr    = [:str => rand(7..22), :end => rand(7..22)]
+    @affects = []
+    @avatar_attr = [:str => rand(7..22), :end => rand(7..22)]
 
-    @inventory      = Inventory.new
-    @equipment      = Equipment.new
+    @inventory = Inventory.new
+    @equipment = Equipment.new
   end
 
   # Debug item creation method
@@ -57,7 +59,32 @@ class Avatar
     end
   end
 
-  def interact(action)
+  # Avatar Method to look at npc
+  def look_at_npc(tokens)
+    @npc = tokens[2]
+    @current_room.npcs.map do |n|
+      if n.name.include?(@npc)
+      puts n.desc.magenta
+
+        # Compare avatar/npc attack value
+        if @base_attack > n.attack
+          @disp_set = "weaker than"
+        elsif @base_attack.between(n.attack - 1, n.attack + 1)
+          @disp_set = "about the same"
+        elsif @base_attack < n.attack
+          @disp_set = "stronger than"
+        end
+
+      puts "The #{n.name} looks #{@disp_set} you."
+
+      end
+    end
+  end
+
+  def interact(object, action)
+    @target = object
+    @object.action
+  end
 
   attr_accessor :stats
   def stats
