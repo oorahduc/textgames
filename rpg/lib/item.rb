@@ -1,5 +1,5 @@
 class Item
-  attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price
+  attr_accessor :name, :type, :attack, :armor, :wearloc, :weight, :price, :exam
   def initialize(object)
     @name = object['name']
     @type = object['type']
@@ -9,4 +9,11 @@ class Item
     @weight = object['weight']
     @price = object['price']
   end
+
+  def exam
+    self.map do |k,v|
+      puts "#{k} : #{v}"
+    end
+  end
+
 end

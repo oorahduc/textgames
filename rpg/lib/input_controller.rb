@@ -14,17 +14,6 @@ class InputController
 		# puts "this is the init message".red  # INIT MESSAGE
 	end
 
-	# Facilitator to Avatar#look_at_npc
-	def ilook(tokens)
-		if tokens[0] == "look" && tokens[1] == "at"
-			avatar.look_at_npc(tokens[2])
-		elsif tokens.size == 2
-			puts "Look at what? Who?"
-		else
-			@current_message = avatar.location.display_room
-		end
-	end
-
 	# Begin command evaluation
 	def evaluate(input)
 		tokens = input.split
@@ -71,7 +60,9 @@ class InputController
 		when "stats"
 			avatar.stats
 		when "look", "l"
-			ilook(tokens)
+			eval_look(tokens)
+		when "exam"
+			eval_exam(tokens)
 		when "test"
 			avatar.inventory.inventory
 		when "inventory", "inv", "i"
@@ -89,6 +80,27 @@ class InputController
 		when "exit", "quit"
 			puts "Thank you for playing!"
 			exit(0)
+		end
+	end
+
+	private
+	# Facilitator to Avatar#look_at_npc
+	def eval_look(tokens)
+		if tokens[1] == "at"
+			avatar.look_at_npc(tokens[2])
+		elsif tokens.size == 2
+			puts "Look at what? Who?"
+		else
+			@current_message = avatar.location.display_room
+		end
+	end
+
+	def eval_exam(tokens)
+		avatar.inventory.contents.each.map do |i|
+			if i.name.include?(tokens[1])
+				## REFACTOR THIS
+				i.map { |k,v| puts "#{k} : #{v}" }
+			end
 		end
 	end
 
