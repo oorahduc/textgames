@@ -7,7 +7,6 @@ class Room
   def initialize
     @objects = []
     @npcs = []
-
     @action = []
 
     @name_articles = ['A', 'An']
@@ -19,7 +18,7 @@ class Room
   end
 
   def display_room
-    puts description.blue, info.gray
+    puts description.blue, info.gray.para
     puts exits
     list_npcs
     list_objects
@@ -38,9 +37,9 @@ class Room
       msg = Thread.new {
         count = 0
         while count < 4 do
-          sleep(rand(10..20))
+          sleep(rand(10..50))
           puts @action['message']
-          # puts
+          puts
           count += 1
         end
         msg.kill

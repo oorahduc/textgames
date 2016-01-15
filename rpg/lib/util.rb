@@ -34,3 +34,18 @@ class Numeric
     self.to_f / n.to_f * 100.0
   end
 end
+
+class String
+  # Wrap string by the given length, and join it with the given character.
+  # The method doesn't distinguish between words, it will only work based on
+  # the length. The method will also strip and whitespace.
+  #
+  def wrap(length = 80, character = $/)
+    scan(/.{#{length}}|.+/).map { |x| x.strip }.join(character)
+  end
+
+  def para
+    @para_width = 80
+    scan(/\S.{0,#{@para_width}}\S(?=\s|$)|\S+/)
+  end
+end

@@ -11,12 +11,15 @@ class Avatar
     @current_room = starting_location
     @avatar_name = name
     @name = @avatar_name
-    @hitpoints = 300
-    @maxhitpoints = 300
-    @base_attack = rand(5..10)
+
+    @avatar_attr = {:str => rand(7..22), :end => rand(7..22)}
+    @hp_precalc = @avatar_attr[:end] * 20
+    @hitpoints = [[300, @hp_precalc].min, 160].max
+    @maxhitpoints = [[300, @hp_precalc].min, 160].max
+    @base_attack = rand(1..4) + @avatar_attr[:str]
+    @base_defense = rand(1..4) + @avatar_attr[:end]
 
     @affects = []
-    @avatar_attr = [:str => rand(7..22), :end => rand(7..22)]
 
     @inventory = Inventory.new
     @equipment = Equipment.new
@@ -91,7 +94,7 @@ class Avatar
   def stats
     puts "You are #{@avatar_name}."
     puts "You have #{@avatar_attr[:str]} strength and #{@avatar_attr[:end]} endurance."
-    puts "You have #{hitpoints} hitpoints"
+    puts "You have #{@hitpoints} hitpoints"
   end
 
   # Avatar Method to wear item by matched keyword

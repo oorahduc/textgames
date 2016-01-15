@@ -71,15 +71,17 @@ class GameDataLoader
     room.description = room_data["desc"]
     room.info = room_data["info"]
     room.action = room_data["action"]
+
     room.objects = []
     if room_data["objects"]
       room_data["objects"].each do |obj|
-        thisobj = Hash[obj[1]]
-        room.objects << build_item(thisobj)
+        # thisobj = Hash[obj[1]]
+        room.objects << build_item(obj)
       end
     elsif !room_data["objects"]
       room.objects = []
     end
+
     room.npcs = []
     if room_data["npcs"]
       room_data["npcs"].each do |npc|

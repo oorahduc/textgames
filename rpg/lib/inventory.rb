@@ -21,9 +21,10 @@ class Inventory
     puts "Inventory".blue
     if @contents.empty?
       puts "Your inventory is empty."
-    end
-    @contents.sort_by {|i| i.type}.each do |item|
-      puts "#{item.name} (#{item.type})"
+    else
+      @contents.sort_by {|i| i.type}.each do |item|
+        puts "#{item.name} (#{item.type})"
+      end
     end
     nil
   end
