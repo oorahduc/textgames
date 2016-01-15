@@ -70,6 +70,7 @@ class GameDataLoader
     room.handle = room_data["handle"]
     room.description = room_data["desc"]
     room.info = room_data["info"]
+    room.action = room_data["action"]
     room.objects = []
     if room_data["objects"]
       room_data["objects"].each do |obj|

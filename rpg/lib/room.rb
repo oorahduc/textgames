@@ -1,5 +1,5 @@
 class Room
-  attr_accessor :description, :rooms, :info, :handle
+  attr_accessor :description, :rooms, :info, :handle, :action
   attr_writer :starting_location
   attr_reader :avatar
 
@@ -7,6 +7,8 @@ class Room
   def initialize
     @objects = []
     @npcs = []
+
+    @action = []
 
     @name_articles = ['A', 'An']
     @vowels = "aeiou"
@@ -18,13 +20,37 @@ class Room
 
   def display_room
     puts description.blue, info.gray
-    puts exits.brown
-    listnpcs
-    listobjects
+    puts exits
+    list_npcs
+    list_objects
   end
 
-  # attr_accessor :listnpcs
-  def listnpcs
+  attr_accessor :eval_action
+  def eval_action
+    if @action['show'] == true
+      do_action(@action['type'])
+      # puts @action['message']
+    end
+  end
+
+  def do_action(type)
+    if type == "periodic_message"
+      msg = Thread.new {
+        count = 0
+        while count < 4 do
+          sleep(rand(10..20))
+          puts
+          puts @action['message']
+          puts
+          count += 1
+        end
+        msg.kill
+      }
+      # nil
+    end
+  end
+
+  def list_npcs
     unless !@npcs
       @npcs.each do |npc|
         if @vowels.include?(npc.name[0])
@@ -38,8 +64,7 @@ class Room
     nil
   end
 
-  # attr_accessor :listobjects
-  def listobjects
+  def list_objects
     if @objects
       @objects.each do |obj|
         if @vowels.include?(obj.name[0])
@@ -47,15 +72,15 @@ class Room
         else
           @article = @name_articles[0]
         end
-        puts "#{@article} #{obj.name} lies on the ground here."
+        puts " #{@article} #{obj.name} lies on the ground here."
       end
     end
     nil
   end
 
   def exits
-    print "Exits: "
-    rooms.keys.join(" ")
+    @ex = rooms.keys.join(" ")
+    print "[ #{@ex.brown} ]"
   end
 
   # attr_accessor :additem

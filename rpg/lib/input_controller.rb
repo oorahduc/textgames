@@ -99,7 +99,9 @@ class InputController
 		avatar.inventory.contents.each.map do |i|
 			if i.name.include?(tokens[1])
 				## REFACTOR THIS
-				i.map { |k,v| puts "#{k} : #{v}" }
+				# i.map { |k,v| puts "#{k} : #{v}" }
+				# i.each { |k,v| puts "#{k} : #{v}" }
+				puts i.to_yaml
 			end
 		end
 	end

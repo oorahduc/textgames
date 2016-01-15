@@ -53,6 +53,7 @@ class Avatar
     if can_move?(direction)
       new_room = @current_room.rooms[direction]
       @current_room = new_room
+      location.eval_action
       true
     else
       false
