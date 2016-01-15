@@ -28,25 +28,27 @@ class Room
   attr_accessor :eval_action
   def eval_action
     if @action['show'] == true
-      do_action(@action['type'])
-      # puts @action['message']
+      do_action(@action)
     end
   end
 
-  def do_action(type)
-    if type == "periodic_message"
+  def do_action(action)
+    case action['type']
+    when "periodic_message"
       msg = Thread.new {
         count = 0
         while count < 4 do
           sleep(rand(10..20))
-          puts
           puts @action['message']
-          puts
+          # puts
           count += 1
         end
         msg.kill
       }
-      # nil
+    when "onetime_message"
+      puts
+      puts @action['message']
+      puts
     end
   end
 

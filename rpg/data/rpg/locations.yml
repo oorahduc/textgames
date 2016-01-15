@@ -44,8 +44,8 @@
   info: You are in an old abandoned shrine. There are cryptic scrawlings all along the walls and ceiling. How were they written on the ceiling? The only way back is north.
   action:
     show: true
-    type: message
-    message:
+    type: onetime_message
+    message: You hear twigs being broken underfoot in the distance.
   objects:
     scimitar:
       name: an ornate scimitar
@@ -63,8 +63,8 @@
   desc: A forest full of lush trees.
   info: The path splits. To the west lies your home. To the east are the mountains. Back to the south is a lake.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -77,8 +77,8 @@
   desc: Your home. It is a happy house.
   info: Your house is here. It is a quiet place. To the east is the path in the forest. If you go west you will enter your house.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -90,8 +90,8 @@
   desc: You are standing in the main room of your house.
   info: The inside of your house is simple but clean and quiet. You have spent many happy hours here. The study is in the north room.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -103,8 +103,8 @@
   desc: You are in your study. It is a clean room with a desk and windows facing outside.
   info: Your study is where your work gets done. There is a letter on your desk.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -115,8 +115,8 @@
   desc: These are the mountains. From up here you can see the valley in which you live.
   info: Further to the east is the pass that leads to the ocean. Back west is the forest.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -128,8 +128,8 @@
   desc: This is the pass that leads to the ocean. It is rocky terrain with huge stone walls all around.
   info: To the east is the ocean. Back west lies the mountains. You can smell the ocean.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -141,8 +141,8 @@
   desc: You are standing by the ocean. It is overcast and cloudy here. Seagulls circle overhead.
   info: Further east along the beach you can see some buildings. Back to the west lies the pass.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
@@ -154,8 +154,8 @@
   desc: You are standing among the buildings of an abandoned village.
   info: There is a strange glowing crystal lying on the ground.
   action:
-    show: true
-    type: message
+    show: false
+    type:
     message:
   objects:
   npcs:
