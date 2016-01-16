@@ -8,6 +8,7 @@ class Item
     @wearloc = object['wearloc']
     @weight = object['weight']
     @price = object['price']
+    @take = object['take']
   end
 
   def exam
@@ -15,5 +16,4 @@ class Item
       puts "#{k} : #{v}"
     end
   end
-
 end

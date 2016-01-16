@@ -15,6 +15,7 @@
       wearloc: wielding
       weight: 2
       price: 10
+      take: true
     - name: shiny ring
       type: armor
       attack: 0
@@ -22,6 +23,7 @@
       wearloc: finger
       weight: 1
       price: 15
+      take: true
   npcs:
     - name: old man
       desc: A rickity old man in a dark grey robe.
@@ -52,6 +54,7 @@
       wearloc: wielding
       weight: 6
       price: 20
+      take: false
   npcs:
   rooms:
     north: lake

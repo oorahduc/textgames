@@ -2,6 +2,8 @@ class Inventory
   attr_accessor :contents
   def initialize
     @contents = []
+    @vowels = "aeiou"
+    @articles = ['a', 'an']
   end
 
   attr_accessor :additem
@@ -23,7 +25,12 @@ class Inventory
       puts "Your inventory is empty."
     else
       @contents.sort_by {|i| i.type}.each do |item|
-        puts "#{item.name} (#{item.type})"
+        if @vowels.include?(item.name[0])
+          @article = @articles[1]
+        else
+          @article = @articles[0]
+        end
+        puts "#{@article} #{item.name} (#{item.type})"
       end
     end
     nil

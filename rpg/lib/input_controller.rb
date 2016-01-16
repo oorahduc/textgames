@@ -18,7 +18,6 @@ class InputController
 	def evaluate(input)
 		tokens = input.split
 		unless valid?(input)
-			# @current_message = "Sorry, that is not a valid command."
 			puts "Sorry, that is not a valid command."
 			return
 		end

@@ -14,8 +14,8 @@ class Avatar
 
     @avatar_attr = {:str => rand(7..22), :end => rand(7..22)}
     @hp_precalc = @avatar_attr[:end] * 20
-    @hitpoints = [[300, @hp_precalc].min, 160].max
-    @maxhitpoints = [[300, @hp_precalc].min, 160].max
+    @hitpoints = [[350, @hp_precalc].min, 160].max
+    @maxhitpoints = [[350, @hp_precalc].min, 160].max
     @base_attack = rand(1..4) + @avatar_attr[:str]
     @base_defense = rand(1..4) + @avatar_attr[:end]
 
