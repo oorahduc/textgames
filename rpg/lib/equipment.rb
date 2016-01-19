@@ -1,6 +1,7 @@
 module Equipment
   class Equipment
-    attr_accessor :worn, :equipped, :possible_wearlocs
+
+    attr_accessor :worn, :possible_wearlocs
     def initialize
       @worn = Hash.new
       @possible_wearlocs = ["head", "neck", "shoulders", "torso", "arms", "hands", "finger", "legs", "feet", "wielding"]
@@ -10,6 +11,7 @@ module Equipment
     end
 
     # Equipped class
+    attr_accessor :equipped
     def equipped
       puts "Equipment:".blue
       if @worn.empty?
