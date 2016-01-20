@@ -6,6 +6,7 @@
   action:
     show: true
     type: periodic_message
+    num: 2
     message: You feel a pair of eyes staring at you from the darkness.
   objects:
     - name: sharp dagger
@@ -45,6 +46,7 @@
   action:
     show: true
     type: onetime_message
+    num:
     message: You hear twigs being broken underfoot in the distance.
   objects:
     - name: ornate scimitar

@@ -36,8 +36,8 @@ class Room
     when "periodic_message"
       msg = Thread.new {
         count = 0
-        while count < 4 do
-          sleep(rand(10..50))
+        while count < @action['num'] do
+          sleep(rand(10..20))
           puts @action['message']
           puts
           count += 1

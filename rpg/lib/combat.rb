@@ -28,7 +28,7 @@ module Combat
 
     attack_turn = (attack_turn + 1) % 2
     end
-
+    
     winner = opponents.first(&:is_alive?)
     puts winner.name
   end

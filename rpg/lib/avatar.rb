@@ -137,16 +137,6 @@ class Avatar
     end
   end
 
-  # def getitem(keyword)
-  #   location.objects.map do |x|
-  #     if x.name.include?(keyword)
-  #       @inventory.contents << x
-  #       location.objects.delete(x)
-  #       puts "You pick up #{x.name}."
-  #     end
-  #   end
-  # end
-
   # Returns formatted list of worn equipment
   attr_accessor :equipped
   def equipped

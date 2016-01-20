@@ -35,6 +35,11 @@ class InputController
 			end
 		when "equipment", "equip", "eq"
 			avatar.equipped
+    when "north", "south", "east", "west"
+      evaluate("go #{command}")
+    when "n", "s", "e", "w"
+      dirs = {"n"=>"north", "s"=>"south", "e"=>"east", "w"=>"west"}
+      evaluate("go #{dirs[command]}")
 		when "wear"
 			keyword = tokens.last
 			avatar.wear_item(keyword)
@@ -121,7 +126,7 @@ class InputController
 
 	# Validate command tokens
 	def valid_commands
-		@commands ||= %w(look l exit quit cmds roomobjs putsroom test stats heal inventory inv i equipment equip eq wear remove rem drop get damage testitems putsroom help)
+		@commands ||= %w(look l exit quit cmds north south east west n s e w stats inventory inv i equipment equip eq wear remove rem drop get north south east west heal damage roomobjs putsroom test testitems putsroom help)
 	end
 
 end
