@@ -130,9 +130,9 @@ class Avatar
   # Avatar Method to get item by matched keyword
   attr_accessor :getitem
   def getitem(keyword)
-    begin
+    unless location.objects.nil?
       location.objects.map{|x| @inventory.contents << x and location.objects.delete(x) and puts "You pick up #{x.name}." if x.name.include?(keyword)}
-    rescue
+    else
       puts "You don't see that."
     end
   end
